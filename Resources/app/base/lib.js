@@ -23,6 +23,8 @@
 	CB.Util = require('/app/modules/util');
 	
 	CB.Ajax = require('/app/modules/ajax');
+	
+	CB.DB = require('/app/plugins/joli').connect(CB.Models.dbName);
 })();
 
 

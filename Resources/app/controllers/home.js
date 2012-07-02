@@ -36,6 +36,21 @@ __exports.viewLoaded = function(e) {
 	this.view.refreshBtn.addEventListener('click', function() {
 		CB.Launch(null, null, 'up');
 	});
+	
+	this.view.john2 = CB.DB.models.get('human').newRecord({
+      first_name: 'John',
+      last_name: 'Doe'
+    });
+    this.view.john2.save();
+
+    // create an other "human" record (persisted)
+    this.view.sarah2 = CB.DB.models.get('human').newRecord({
+      first_name: 'Sarah',
+      last_name: 'Sure'
+    });
+    this.view.sarah2.save();
+    
+    CB.Debug.dump(this.view.sarah2.get('first_name'), 53, 'home.js');
 };
 
 __exports.viewWillAppear = function(e) {

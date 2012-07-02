@@ -136,7 +136,9 @@ var CB = {
 	/**
 	 * Data model
 	 */
-	Models : {},
+	Models : {
+		dbName : 'coderblog'
+	},
 	/**
 	 * Remote webserver's API
 	 */
@@ -145,6 +147,10 @@ var CB = {
 	 * Common function for controllers and views
 	 */
 	Common : {},
+	/**
+	 * Data base object (joli module)
+	 */
+	DB : {},
 	/**
 	 * Utility with the app (module)
 	 */
@@ -380,7 +386,6 @@ Ti.include('/app/base/lib.js');
 					previous.base.viewWillDisappear(controller);
 				}
 				controller.base.viewDidAppear(controller);
-				CB.Debug.dump(CB.mainView,358,'core.js');
 			});
 		});
 
@@ -445,7 +450,6 @@ Ti.include('/app/base/lib.js');
 	 * 	down: for move to down animation, default move to left
 	 */
 	CB.setRootController = function(/*Controller*/controller, animate) {
-		CB.Debug.echo(animate, 425);
 		CB.pushController(controller, animate);
 	};
 

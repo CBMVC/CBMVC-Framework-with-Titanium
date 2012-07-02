@@ -275,6 +275,7 @@ Add a refresh function to the top bar
 You need to set the remote server url for ajax in the following aip.js file at first:
 
 API (/Resources/app/base/api.js):
+
 	/**
 	 * set the remote API
 	 */
