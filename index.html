@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Cbmvc-framework-with-titanium : This is a titanium MVC framework, and the CB just mean my website Code Blog :)" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Cbmvc-framework-with-titanium</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/winsonet/CBMVC-Framework-with-Titanium">View on GitHub</a>
+
+          <h1 id="project_title">Cbmvc-framework-with-titanium</h1>
+          <h2 id="project_tagline">This is a titanium MVC framework, and the CB just mean my website Code Blog :)</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/winsonet/CBMVC-Framework-with-Titanium/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/winsonet/CBMVC-Framework-with-Titanium/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>CBMVC - A MVC Framework for Titanium SDK</h1>
+
+<h2>Overview</h2>
+
+<hr><p>This is a mvc frameork for Titanium. The CB is mean CodeBlog, this is my website(<a href="http://www.coderblog.in">www.coderblog.in</a>).
+and it's base on silver <a href="https://github.com/tanin47/silver">https://github.com/tanin47/silver</a>. But I have added and improved a lot of it :)</p>
+
+<p>The example project here shows you how to build navigate betweens pages (with animation), and how to build Facebook-alike menu.</p>
+
+<p>with this framework, please update your titanium sdk to 2.0.1 or above.</p>
+
+<h2>1. Life cycle:</h2>
+
+<pre><code>Launch app ==&gt;  home view ==&gt;  home controller
+</code></pre>
+
+<h2>2. How to setup a controller:</h2>
+
+<p>Your controller must be in /Resources/app/controller, and the corresponding view must be in Resources/app/views.
+A controller and its corresponding view should have identical name.</p>
+
+<p>For example:</p>
+
+<pre><code>/Resources/app/controllers/home.js
+/Resources/app/views/home.js
+</code></pre>
+
+<p>Moreover, you need to add the controller's name into CB.Launch when launch the app
+In app.js, it should look like this:</p>
+
+<pre><code>//load the controllers, the main controller must be the last one
+Var controllers = ['home','login','mainFrame'];
+CB.Launch(controllers);
+</code></pre>
+
+<h2>3. How to write a controller:</h2>
+
+<p>please refer to the object __exports.
+If you declare <code>__exports.some_function</code>, then the controller will have some_function method.
+We also have a life-cycle for a controller, you can declare these methods:</p>
+
+<pre><code>__exports.viewLoaded = function(e) { ... };
+
+__exports.viewWillAppear = function(e) { ... };
+__exports.viewDidAppear = function(e) { ... };
+__exports.viewWillDisappear = function(e) { ... };
+__exports.viewDidDisappear = function(e) { ... };
+The methods' names are self-explanatory.
+</code></pre>
+
+<h2>4. How to switch between controllers:</h2>
+
+<p>a. Go to next view : 
+ You can call the following method to switch next view, and set the animation:
+CB.pushController = function(controller, animate);
+For example:</p>
+
+<pre><code>//switch to the login view and use ‘left’ animation
+CB.pushController(CB.controllers.login,’left’);
+</code></pre>
+
+<p>b. Go to home view : 
+ You can call the following method to switch home view, and set the animation:
+For example:</p>
+
+<pre><code>//go to the home view and use ‘right’ animation
+CB.Launch(null, null, 'right');
+
+//or just refresh a view without animation
+CB.Launch('home', true, 'none');
+</code></pre>
+
+<p>c. Back to previous view : 
+ You can call the following method to back the previous view:
+For example:</p>
+
+<pre><code>//just back to previous view
+CB.popController();
+</code></pre>
+
+<p>d. About the animation:</p>
+
+<p>none without animation</p>
+
+<ul>
+<li>  left or don't set it, for move to left animation</li>
+<li>  right: for move to right animation, default move to left</li>
+<li>  up: for move to up animation, default move to left</li>
+<li>  down: for move to down animation, default move to left</li>
+</ul><h2>5. How to handle data and event:</h2>
+
+<p>You can add the layout element(etc. view button) in the view page, and add the event listener in controller.
+For example:</p>
+
+<p>Home view (/Resources/app/view/home.js):</p>
+
+<pre><code>//create the base view
+var view = Ti.UI.createView({
+    width : '100%,
+    height : '100%',
+    backgroundImage : CB.ApplicationDirectory + 'images/bg.png'
+});
+
+//create the button with the view
+view.memberLoginBtn = Ti.UI.createButton({
+    left : 0,
+    top : '74%',
+    width : '100%',
+    height : '12%',
+    title : '  Member Login',
+    color : 'red',
+    textAlign : 'left',
+    font : {
+        fontSize : '18dp',
+        fontWeight : 'bold'
+    },
+    backgroundImage : CB.ApplicationDirectory + 'images/memLogin.png'       
+});
+
+//add the button into the view
+view.add(view.memberLoginBtn);
+</code></pre>
+
+<p>Home controller  (/Resources/app/controller/home.js):</p>
+
+<pre><code>//the init events must be added to  __exports.viewLoaded
+__exports.viewLoaded = function() {
+    this.view.memberLoginBtn.addEventListener('click', function() {
+        //pass data to next controller
+        CB.controllers.login.data = 'test';
+        CB.pushController(CB.controllers.login);
+    });
+};
+</code></pre>
+
+<p>Get data within login controller  (/Resources/app/controller/login.js):</p>
+
+<pre><code>//Must be use viewWillAppear or viewDidAppear to get data and show it
+__exports.viewWillAppear = function(e) {
+    //check the data whether is available
+    if(e != undefined &amp;&amp; e.data != undefined){
+        //set the data to view's element
+        this.view.loginLabel.text = e.data;
+    }
+}
+</code></pre>
+
+<h2>6. How to set styles to the element:</h2>
+
+<p>You can set an element’s style with CB.Styles namespace, add the style’s code in <code>/Resources/app/base/styles.js</code></p>
+
+<p>For the better, create a difference namespace for each view’s style:
+For example, add a style for home view:</p>
+
+<pre><code>Styles (/Resources/app/base/style.js):
+ (function() {
+    /**
+     * home view's styles
+     */
+    CB.Styles.home = {
+        baseView : {
+            width : CB.Styles.screenWidth,
+            height : CB.Styles.screenHeight,
+            backgroundImage : CB.ApplicationDirectory + 'images/bg.png'
+        },
+        goBtn : {
+            top : '50%',
+            height : '6%',
+            font : {
+                fontSize : '17dp',
+                fontWeight : 'bold'
+            },
+            title: 'Go Next'
+        },
+        switchLangBtn : {
+            top : '30%',
+            height : '6%',
+            font : {
+                fontSize : '17dp',
+                fontWeight : 'bold'
+            },
+            title: CB.Util.L('switchLang')
+        }
+    }
+})();
+</code></pre>
+
+<p>In the home view , can use styles to create the elements now:</p>
+
+<p>Home view (/Resources/app/view/home.js):</p>
+
+<pre><code>__exports = (function() {
+    //set the views's name
+    var viewName = 'home';
+    //create element and set style with CB.Styles
+    var view = Ti.UI.createView(CB.Styles[viewName].baseView);
+    view.name = viewName; //just for add the refresh debug button
+
+    view.goBtn = Ti.UI.createButton(CB.Styles[view.name].goBtn);
+    view.add(view.goBtn);
+
+    view.switchLangBtn = Ti.UI.createButton(CB.Styles[view.name].switchLangBtn);
+    view.add(view.switchLangBtn);
+
+    return view;
+})();
+</code></pre>
+
+<p>Also you can add some logic for handle different style(just like debug mode or cross platform logic), please refer to the /Resources/app/view/home.js file.</p>
+
+<h2>7. How to debug the app:</h2>
+
+<p>You can use CB.Debug for echo the debug message, there are 3 methods for debugger:</p>
+
+<p>Echo a debug  message string:</p>
+
+<pre><code>/**
+ * General echo the debug message
+ * @param {String} s, echo which debug message
+ * @param {int} line, the line of echo message
+ * @param {String} page, the page  which debug message show
+ * @param {String} type, debug type, support Titanium debug type:
+ *       info: display message with [INFO] style in console 
+ *       warn: display message with [WARN] style in console (default)
+ *       error: display message with [ERROR] style in console
+ */
+CB.Debug.echo(s, line, page, type)
+
+//for example:
+CB.Debug.echo('Debug message, testing',33,'login controller',’warn’);
+
+//or just show the debug message in line 33
+CB.Debug.echo('Debug message, testing',33);
+</code></pre>
+
+<p>Dump an object(JSON format) </p>
+
+<pre><code>/**
+ * General dump the object
+ * @param {Object} o, dump object
+ * @param {int} line, the line of debug object
+ * @param {String} page, the page  which debug message show
+ * @param {String} type, debug type, support Titanium debug type:
+ *       info: display message with [INFO] style in console 
+ *       warn: display message with [WARN] style in console (default)
+ *       error: display message with [ERROR] style in console
+ */
+function dump(o, line, page, type)
+
+//for example:
+CB.Debug.dump(this.view,10,'login controller','info');
+
+//or just dump the object in line 10
+CB.Debug.dump(this.view,33);
+</code></pre>
+
+<p>Add a refresh function to the top bar</p>
+
+<pre><code>/**
+ * Add a refresh function to top bar, then you can click the top bar to refresh the page 
+ * just for review the layout changed and testing without re-launch the app.
+ * @param {Object} coreObj
+ * @param {Object} view
+ */
+function addRefreshBtn(coreObj, view)
+
+//for example, add the button before view appear 
+__exports.viewWillAppear = function(e) {
+    //add a refresh button for testing layout
+    CB.Debug.addRefreshBtn(CB, e.view);
+};
+</code></pre>
+
+<h2>8. How to use ajax request:</h2>
+
+<p>You need to set the remote server url for ajax in the following aip.js file at first:</p>
+
+<p>API (/Resources/app/base/api.js):</p>
+
+<pre><code>/**
+ * set the remote API
+ */
+CB.API = {
+    server : 'http://www.coderblog.in/'
+};
+
+(function(){
+
+    CB.Platform.extend(CB.API, {
+        //set each api function's url
+        login : CB.API.server + 'api/login.aspx'
+        info : CB.API.server + 'api/info.aspx',
+    });
+
+})();
+</code></pre>
+
+<p>Get remote API data and redirect to next view:</p>
+
+<p>Call getRemoteData function (/Resources/app/base/common.js):</p>
+
+<pre><code>/**
+ * Get date with remote API function
+ * @param {String} api, the API's name 
+ * @param {Object} controller, which controller need to show after got data
+ * @param {Boolean} saveData, save response data to local storage or just pass data to next view
+ *  'true', save in local storage
+ *  'false', just pass data to controller.model to next view (default)
+ * @param {String} animate
+ */ getRemoteData : function(api, controller, animate)
+
+//get the user info with info api and redirect to service category view
+CB.Common.getRemoteData('info', CB.controllers.serviceCategory);
+</code></pre>
+
+<p>after that, you can access the user info data within service category controller :</p>
+
+<p>Handle Ajax Callback (/Resources/app/controllers/serviceCategory.js):</p>
+
+<pre><code>//get user info within controller in __exports.viewWillAppear event
+__exports.viewWillAppear = function(e) {    
+     //get data from controller.model   
+    if(e != undefined &amp;&amp; e.model != undefined){
+    e.view.barTitle.text = CB.Util.L('hi') + e.model.first_name + ' ' + e.model.last_name;
+}
+
+//or get date from local storage with api name
+var userInfo = CB.Util.loadObject('info');  
+if(userInfo != null){
+    e.view.barTitle.text = CB.Util.L('hi') + userInfo.first_name + ' ' + userInfo.last_name;
+}
+    ...
+</code></pre>
+
+<h2>9. How to localization:</h2>
+
+<p>The framework can support multiple language, and can be effective immediately after changed the language:</p>
+
+<p>a. Create a language xml file under /Resources/app/languages/ folder, and please follow the following file name format :</p>
+
+<p>lang.xml</p>
+
+<pre><code>//for example, English should be use
+/Resources/app/languages/en.xml
+
+//Chinese should be use
+/Resources/app/languages/cn.xml
+</code></pre>
+
+<p>and in the  xml language file, must be use the following format:</p>
+
+<p>/Resources/app/languages/en.xml</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;root&gt;
+&lt;string id="logo"&gt;Welcome to Coder Blog!&lt;/string&gt;
+&lt;string id="switchLang"&gt;Switch to Chinese&lt;/string&gt;
+&lt;/root&gt;
+</code></pre>
+
+<p>After that, you can use the following to display the language with the key:
+    CB.Util.L('logo');</p>
+
+<p>b. Switch language: 
+You can just call the following method to switch the language, after you do that, need to call :</p>
+
+<pre><code>CB.Util.switchLang('en');
+</code></pre>
+
+<p>after you do that, need to call the following method to refresh the page, so that you can see the changed language:</p>
+
+<p>//refresh the page after changed the language
+    CB.Launch('home', true, ’down’);</p>
+
+<p>c. Also you can set the default language with first launch the app:
+/Resources/app.js</p>
+
+<pre><code>//set the default language with the app
+CB.DefaultLang = 'en';
+</code></pre>
+
+<h2>License</h2>
+
+<p>MIT License <a href="http://www.opensource.org/licenses/mit-license.php">http://www.opensource.org/licenses/mit-license.php</a></p>
+
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
+EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Cbmvc-framework-with-titanium maintained by <a href="https://github.com/winsonet">winsonet</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-755321-7");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
