@@ -373,7 +373,8 @@ c. Also you can set the default language with first launch the app:
 	//set the default language with the app
 	CB.DefaultLang = 'en';
 
-＃ License
+License
+------------------------------------------
 
 MIT License http://www.opensource.org/licenses/mit-license.php
 
