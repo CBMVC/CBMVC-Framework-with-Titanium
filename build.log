@@ -1,0 +1,33 @@
+Logfile initialized
+[INFO] logfile = /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/build.log
+[DEBUG] /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.GA/android/builder.py simulator CoderBlog /Volumes/MacCodes/Code/Mobile/Android/android-sdk-macosx /Volumes/MacCodes/Code/Mobile/MyApps/CBApp com.cbmvc.app 9 HVGA 
+[INFO] Building CoderBlog for Android ... one moment
+[INFO] Titanium SDK version: 2.1.0 (06/28/12 12:16 6e3cab6)
+[DEBUG] Waiting for device to be ready ...
+[TRACE] adb devices returned 1 devices/emulators
+[DEBUG] Device connected... (waited 0 seconds)
+[DEBUG] waited 0.020331 seconds on emulator to get ready
+[DEBUG] com.cbmvc.app installed? True
+[INFO] Fastdev server running, deploying in Fastdev mode
+[INFO] Copying CommonJS modules...
+[INFO] Copying project resources..
+[TRACE] COPYING MODIFIED FILE: /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/Resources/app/base/styles.js => /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/build/android/bin/assets/Resources/app/base/styles.js
+[TRACE] COPYING MODIFIED FILE: /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/Resources/app/controllers/setting.js => /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/build/android/bin/assets/Resources/app/controllers/setting.js
+[TRACE] COPYING MODIFIED FILE: /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/Resources/app/views/setting.js => /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/build/android/bin/assets/Resources/app/views/setting.js
+[INFO] Tiapp.xml unchanged, skipping class generation
+[DEBUG] Processing Android resource drawables
+[DEBUG] found drawable-long-land-hdpi splash screen at /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/Resources/android/images/res-long-land-hdpi/default.png
+[DEBUG] found drawable-long-land-ldpi splash screen at /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/Resources/android/images/res-long-land-ldpi/default.png
+[DEBUG] found drawable-long-port-hdpi splash screen at /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/Resources/android/images/res-long-port-hdpi/default.png
+[DEBUG] found drawable-long-port-ldpi splash screen at /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/Resources/android/images/res-long-port-ldpi/default.png
+[DEBUG] found drawable-notlong-land-hdpi splash screen at /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/Resources/android/images/res-notlong-land-hdpi/default.png
+[DEBUG] found drawable-notlong-land-ldpi splash screen at /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/Resources/android/images/res-notlong-land-ldpi/default.png
+[DEBUG] found drawable-notlong-land-mdpi splash screen at /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/Resources/android/images/res-notlong-land-mdpi/default.png
+[DEBUG] found drawable-notlong-port-hdpi splash screen at /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/Resources/android/images/res-notlong-port-hdpi/default.png
+[DEBUG] found drawable-notlong-port-ldpi splash screen at /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/Resources/android/images/res-notlong-port-ldpi/default.png
+[DEBUG] found drawable-notlong-port-mdpi splash screen at /Volumes/MacCodes/Code/Mobile/MyApps/CBApp/Resources/android/images/res-notlong-port-mdpi/default.png
+[INFO] Waiting for SDCard to become available..
+[INFO] Re-launching application ... CoderBlog
+[INFO] Launching application ... CoderBlog
+[TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.cbmvc.app/.CoderblogActivity }
+

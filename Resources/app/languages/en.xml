@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- general message -->
+	<string id="logo">Welcome to Coder Blog!</string>
+	<string id="switchLang">Switch to Chinese</string>
+	
+	<!-- error message -->
+	<string id="error">Error</string>
+	<string id="timeout">Session is timeout!</string>	
+	<string id="loginError">Please input user name and password!</string>
+	<string id="invalidUser">Invalid User</string>
+	<string id="wrongPassword">Password is wrong!</string>
+	<string id="unknowError">Unknow Error</string>
+</root>
