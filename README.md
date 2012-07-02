@@ -4,6 +4,8 @@
 This is a mvc frameork for Titanium. The CB is mean CodeBlog, this is my website(www.coderblog.in).
 and it's base on silver https://github.com/tanin47/silver. But I have added and improved a lot of it :)
 
+The example project here shows you how to build navigate betweens pages (with animation), and how to build Facebook-alike menu.
+
 with this framework, please update your titanium sdk to 2.0.1 or above.
 
 1. Life cycle:
