@@ -27,9 +27,10 @@ __exports.viewLoaded = function(e) {
 			//objName : 'row',
 			//touchEnabled : true,
 			height : '15%',
-			//title:'Testing row ' + i
+			title:'Testing row ' + i
 		});
-		row.add(Ti.UI.createLabel(CB.Styles[this.view.name].rowText));
+		
+		//row.add(Ti.UI.createLabel(CB.Styles[this.view.name].rowText));
 		tableData.push(row);
 	}
 

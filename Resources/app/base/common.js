@@ -19,6 +19,60 @@
  * Common functions for all controllers and views
  */
 CB.Common = {
+	UI:{
+		/**
+		 * Create a dropdown list within a web view 
+		 * @param {Object} view, which view need to add the dropdown list object
+		 * 
+		 * view.ddlArgs = {
+		 * 	id : ddl object id,
+		 *  innerWidth: webview ddl width,
+		 *  innerHeight: webview ddl height,
+		 *  innerFontSize: webview ddl font size(default is 12),
+		 *  top: ddl top,
+		 *  left: ddl left,
+		 *  width: ddl width,
+		 *  height: ddl height,
+		 *  items :[
+		 * 		//'the ddl option items'
+		 * 		{text:'test', value:1}
+		 * 	],
+		 *  callback : the call back function
+		 * }
+		 */
+		createDropDownList : function(view){
+			var html = "<html><meta name='viewport' content='user-scalable=0'><body bgcolor='#5a5c64' style='margin:0;padding:0'>";
+				html += "<select id='{0}' style='width: {1}px; height: {2}px; font-size: {3}px; '>";
+				for(var itemIndex in view.ddlArgs.items){
+					html += "<option value=\"{0}\">{1}</option>".format(view.ddlArgs.items[itemIndex].value, view.ddlArgs.items[itemIndex].text);
+				}
+				html += "</select>";
+				html += "<script type='text/javascript'>";
+				html += "document.getElementById('{0}').onchange = function(){ Titanium.App.fireEvent('app:set{0}',{value:this.value}); };";
+				html += "</script>";
+				html += "</body></html>";
+			
+			
+			html = html.format(view.ddlArgs.id, 
+							   view.ddlArgs.innerWidth, 
+							   view.ddlArgs.innerHeight, 
+							   view.ddlArgs.innerFontSize == undefined ? '12' : view.ddlArgs.innerFontSize);
+			
+			view[view.ddlArgs.id + 'WebView'] = Ti.UI.createWebView({
+				top : view.ddlArgs.top,
+				left : view.ddlArgs.left,
+				width : view.ddlArgs.width,
+				height : view.ddlArgs.height,
+				html : html
+			});
+			view.add(view[view.ddlArgs.id + 'WebView']);
+			
+			Ti.App.addEventListener("app:set" + view.ddlArgs.id, function(e) {
+				view.ddlArgs.callback(e);
+			});
+				
+		}
+	},
 	/**
 	 * User login function
 	 * @param {String} userId, login user id

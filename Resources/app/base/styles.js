@@ -54,7 +54,7 @@ CB.Styles = {
 			width : CB.screenWidth,
 			//if show the statusbar, then need to minus the statusbar height
 			height : (CB.screenHeight - CB.screenHeight * 0.02),
-			backgroundImage : CB.Styles.imagePath + 'bg.png'
+			backgroundImage : CB.Styles.imagePath + 'bg.jpg'
 		},
 		barTitle : {
 			width : 'auto',
@@ -74,7 +74,7 @@ CB.Styles = {
 			width : CB.screenWidth,
 			//if show the statusbar, then need to minus the statusbar height
 			height : (CB.screenHeight - CB.screenHeight * 0.02),
-			backgroundImage : CB.Styles.imagePath + 'bg.png'
+			backgroundImage : CB.Styles.imagePath + 'bg.jpg'
 		},
 		mainFrame:{
 			left: -CB.screenWidth,
@@ -90,7 +90,7 @@ CB.Styles = {
 		    width: CB.screenWidth,
 		    height: CB.screenHeight,
 		    backgroundColor:'#fff',
-		    backgroundImage : CB.Styles.imagePath + 'bg.png'
+		    backgroundImage : CB.Styles.imagePath + 'bg.jpg'
 		},
 		mainMenuBar : {
 		    right: 0,
