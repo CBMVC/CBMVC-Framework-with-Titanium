@@ -18,90 +18,6 @@
 /**
  * The data models, include all data operation
  */
-
-(function() {
-	/**
-	 * setup and init database
-	 */
-	/*
-	CB.DB.initDatabase = function() {
-		// Assign the Joli ORM
-		CB.DB = require('/app/modules/joli').connect(CB.Models.dbName);
-
-		// Table schemas
-		CB.Models.human = new CB.DB.model({
-			table : 'test',
-			columns : {
-				id : 'INTEGER PRIMARY KEY AUTOINCREMENT',
-				city_id : 'INTEGER',
-				first_name : 'TEXT',
-				last_name : 'TEXT'
-			},
-			methods : {
-				countIn : function(cityName) {
-					// search for the city id
-					var city = CB.DB.models.get('city').findOneBy('name', cityName);
-
-					if (!city) {
-						throw 'Could not find a city with the name ' + cityName + '!';
-					} else {
-						return this.count({
-							where : {
-								'city_id = ?' : city.id
-							}
-						});
-					}
-				}
-			},
-			objectMethods : {
-				move : function(newCityName) {
-					// search for the city id
-					var city = CB.DB.models.get('city').findOneBy('name', newCityName);
-
-					if (!city) {
-						throw 'Could not find a city with the name ' + newCityName + '!';
-					} else {
-						this.set('city_id', city.id);
-					}
-				},
-				getCityName : function() {
-					// search for the city id
-					var city = CB.DB.models.get('city').findOneById(this.city_id);
-
-					if (!city) {
-						throw 'Could not find a city for this person!';
-					} else {
-						return city.name;
-					}
-				}
-			}
-		});
-
-		CB.Models.city = new CB.DB.model({
-			table : 'city',
-			columns : {
-				id : 'INTEGER PRIMARY KEY AUTOINCREMENT',
-				country_id : 'INTEGER',
-				name : 'TEXT',
-				description : 'TEXT'
-			}
-		});
-
-		CB.Models.country = new CB.DB.model({
-			table : 'country',
-			columns : {
-				id : 'INTEGER PRIMARY KEY AUTOINCREMENT',
-				name : 'TEXT'
-			}
-		});
-		
-		CB.DB.models.initialize();
-	};
-*/
-})();
-
-
-
 CB.Models = (function() {
   var m = {};
 
@@ -112,7 +28,19 @@ CB.Models = (function() {
       city_id:            'INTEGER',
       first_name:         'TEXT',
       last_name:          'TEXT'
-    }
+    },
+		methods : {
+			getByFirstName : function(firstName) {
+				// get by firstName
+				var result = CB.DB.models.get('human').findOneBy('first_name', firstName);
+
+				if (!result) {
+					throw 'Could not find a firstName  with the  ' + firstName + '!';
+				} else {
+					return result;
+				}
+			}
+		}
   });
 
   m.city = new CB.DB.model({

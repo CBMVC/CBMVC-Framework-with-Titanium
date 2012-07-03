@@ -25,7 +25,7 @@ __exports = (function() {
 	view.add(view.backBtn);
 
 	view.table = Ti.UI.createTableView(CB.Styles[view.name].table);
-
+	
 	view.add(view.table);
 
 	return view;

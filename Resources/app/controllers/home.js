@@ -50,7 +50,7 @@ __exports.viewLoaded = function(e) {
     });
     this.view.sarah2.save();
     
-    CB.Debug.dump(this.view.sarah2.get('first_name'), 53, 'home.js');
+   
 };
 
 __exports.viewWillAppear = function(e) {

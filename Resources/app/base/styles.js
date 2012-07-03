@@ -164,13 +164,13 @@ CB.Styles = {
 	}
 
 	/**
-	 * login view's styles
+	 * Setting view's styles
 	 */
 	CB.Styles.setting = {
 		table : {
 			width:'90%',
 			height:'80%',
-			top: '10%',
+			top: '10%'
 			//objName : 'table'
 		},
 		backBtn : {
@@ -205,7 +205,7 @@ CB.Styles = {
 	 */
 	if (CB.DebugMode.style) {
 		//home's debug layout:
-		CB.Platform.extend(CB.Styles.home.logo, CB.Styles.logo);
+		CB.Platform.extend(CB.Styles.home.logo, CB.Styles.debugLayout);
 
 	}
 })();

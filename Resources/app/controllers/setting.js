@@ -22,19 +22,20 @@ __exports.viewLoaded = function(e) {
 	});
 	
 	var tableData = [];
-	for (var i = 0; i <= 20; i++) {
-		var row = Ti.UI.createTableViewRow({
-			//objName : 'row',
-			//touchEnabled : true,
-			height : '15%',
-			title:'Testing row ' + i
-		});
-		
-		//row.add(Ti.UI.createLabel(CB.Styles[this.view.name].rowText));
-		tableData.push(row);
-	}
-
+		for (var i = 0; i <= 20; i++) {
+			var row = Ti.UI.createTableViewRow({
+				//objName : 'row',
+				//touchEnabled : true,
+				height : '35dp',
+				title:'Testing row ' + i
+			});
+			
+			//row.add(Ti.UI.createLabel(CB.Styles[this.view.name].rowText));
+			tableData.push(row);
+		}
+	
 	this.view.table.setData(tableData);
+	CB.Debug.dump(this.view.table.data,38);
 };
 
 

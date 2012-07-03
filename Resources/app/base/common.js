@@ -135,8 +135,9 @@ CB.Common = {
 	 * 					true, save in local storage
 	 * 					false, just pass data to controller.model to next view
 	 * @param {String} animate
+ 	 * @param {Object} requestData, the data need to be pass to server (except user session_id and user_key)
 	 */
-	getRemoteData : function(api, controller, saveData, animate) {
+	getRemoteData : function(api, controller, saveData, animate, requestData) {
 		//get login user
 		var user = CB.Util.loadObject('user');
 
@@ -152,11 +153,11 @@ CB.Common = {
 				},
 				url : CB.API[api],
 				onerror : function(d) {
-					CB.Debug.dump(d, 81, 'base/common.js');
+					CB.Debug.dump(d, 156, 'base/common.js');
 					CB.Util.alert(CB.Util.L('unknowError'), CB.Util.L('error'));
 				},
 				callback : function(d) {
-					CB.Debug.dump(d, 85, 'base/common.js');
+					CB.Debug.dump(d, 160, 'base/common.js');
 					var result = d[api].response_details;
 					if (result.status == '0') {
 						if (saveData) {
@@ -176,6 +177,9 @@ CB.Common = {
 					}
 				}
 			}
+			if(requestData != undefined){
+				CB.Platform.extend(ajaxObj.data, requestData);
+			}
 			CB.Ajax.request(ajaxObj);
 		} else {
 			CB.Util.removeObject('user');
@@ -191,14 +195,14 @@ CB.Common = {
 	 * @param {Object} view
 	 */
 	viewHeader : function(view) {
-
+		//common layout functions and elements within header
 	},
 	/**
-	 * Common view bottom bar
+	 * Common view foter
 	 * @param {Object} view
 	 */
-	viewBottomBar : function(view) {
-
+	viewFooter : function(view) {
+		//common layout functions and elements within footer
 	},
 	/**
 	 * Add a left menu within the view
@@ -234,7 +238,7 @@ CB.Common = {
 		
 		//menu events
 		mainView.addEventListener('click', function(e) {
-			CB.Debug.dump(e.source);
+			CB.Debug.dump(e.source,241, 'common.js');
 			//just click on the view
 			if(e.source.mainFrame != undefined){
 				CB.Common.toggleMenu(mainView);
