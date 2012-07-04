@@ -337,6 +337,7 @@ CBMVC use joli for data models, so you can to https://github.com/xavierlacot/jol
 I just introduce how to use joli within CBMVC:
 
 1. Setup your database's name in /Resources/app/base/core.js file:
+
 	/**
 	 * Data model
 	 */
@@ -347,6 +348,7 @@ I just introduce how to use joli within CBMVC:
 2. Create a model and map your database table:
 
 /Resources/app/base/models.js
+
 	CB.Models = (function() {
   		var m = {};
   		//create table sturcture
