@@ -1,57 +1,33 @@
 Logfile initialized
 [INFO] logfile = /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build.log
-[DEBUG] /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/builder.py simulator CoderBlog /Volumes/MacCodes/Code/Mobile/Android/android-sdk-macosx /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium com.cbmvc.app 9 HVGA 
+[DEBUG] /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/builder.py simulator CoderBlog /Volumes/MacCodes/Code/Mobile/Android/android-sdk-macosx /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium com.cbmvc.app 9 HVGA 
 [INFO] Building CoderBlog for Android ... one moment
-[INFO] Titanium SDK version: 2.1.0 (07/02/12 17:22 d5f10ea)
+[INFO] Titanium SDK version: 2.0.2 (05/30/12 10:21 2ff31a3)
 [DEBUG] Waiting for device to be ready ...
+[TRACE] adb devices returned 0 devices/emulators
 [TRACE] adb devices returned 1 devices/emulators
-[DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.019091 seconds on emulator to get ready
+[TRACE] adb devices returned 1 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
+[DEBUG] Device connected... (waited 45 seconds)
+[DEBUG] waited 45.254763 seconds on emulator to get ready
+[INFO] Waiting for the Android Emulator to become available
 [DEBUG] com.cbmvc.app installed? True
 [INFO] Fastdev server running, deploying in Fastdev mode
 [INFO] Copying CommonJS modules...
 [INFO] Copying project resources..
-[INFO] Detected change in tiapp.xml, or assets deleted. Forcing full re-build...
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/android/appicon.png => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/appicon.png
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/android/default.png => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/default.png
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/base/api.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/base/api.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/base/common.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/base/common.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/base/core.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/base/core.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/base/lib.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/base/lib.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/base/mixin.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/base/mixin.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/base/models.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/base/models.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/base/platform.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/base/platform.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/base/styles.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/base/styles.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/controllers/home.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/controllers/home.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/controllers/mainFrame.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/controllers/mainFrame.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/controllers/setting.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/controllers/setting.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/languages/cn.xml => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/languages/cn.xml
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/languages/en.xml => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/languages/en.xml
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/modules/ajax.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/modules/ajax.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/modules/debug.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/modules/debug.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/modules/util.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/modules/util.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/plugins/joli.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/plugins/joli.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/plugins/underscore.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/plugins/underscore.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/views/home.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/views/home.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/views/mainFrame.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/views/mainFrame.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/views/setting.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/views/setting.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app.js
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/images/arrow-btn.png => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/images/arrow-btn.png
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/images/bar-top.png => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/images/bar-top.png
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/images/bg-category-title.png => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/images/bg-category-title.png
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/images/bg.jpg => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/images/bg.jpg
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/images/icon-home.png => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/images/icon-home.png
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/images/icon-setting.png => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/images/icon-setting.png
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/images/menu-bar.png => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/images/menu-bar.png
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/images/menu-btn-left.png => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/images/menu-btn-left.png
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/images/menu-btn-right.png => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/images/menu-btn-right.png
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/images/menu-btn.psd => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/images/menu-btn.psd
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/images/menu-selected.png => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/images/menu-selected.png
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/KS_nav_ui.png => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/KS_nav_ui.png
-[TRACE] COPYING CREATED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/KS_nav_views.png => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/KS_nav_views.png
+[TRACE] COPYING MODIFIED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/base/core.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/base/core.js
+[TRACE] COPYING MODIFIED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/base/styles.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/base/styles.js
+[TRACE] COPYING MODIFIED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/controllers/setting.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/controllers/setting.js
+[TRACE] COPYING MODIFIED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/views/setting.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/views/setting.js
+[TRACE] COPYING MODIFIED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app.js
 [TRACE] Generating Java Classes
 [DEBUG] Processing Android resource drawables
-[DEBUG] app stylesheet => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/gen/com/cbmvc/app/ApplicationStylesheet.java
 [DEBUG] copying app icon: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/appicon.png
 [DEBUG] generating theme.xml
 [DEBUG] found drawable-long-land-hdpi splash screen at /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/android/images/res-long-land-hdpi/default.png
@@ -76,12 +52,11 @@ Logfile initialized
 [DEBUG] copying /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/android/images/res-notlong-port-mdpi/default.png splash screen to /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/res/drawable-notlong-port-mdpi/background.png
 [DEBUG] found splash screen at /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/default.png
 [TRACE] Writing out AndroidManifest.xml
-[DEBUG] adding /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/gen/com/cbmvc/app/ApplicationStylesheet.java to javac build list
 [DEBUG] adding /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/gen/com/cbmvc/app/CoderblogActivity.java to javac build list
 [DEBUG] adding /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/gen/com/cbmvc/app/CoderblogAppInfo.java to javac build list
 [DEBUG] adding /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/gen/com/cbmvc/app/CoderblogApplication.java to javac build list
 [DEBUG] adding /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/gen/com/cbmvc/app/R.java to javac build list
-[DEBUG] Building Java Sources: "/Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/gen/com/cbmvc/app/ApplicationStylesheet.java" "/Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/gen/com/cbmvc/app/CoderblogActivity.java" "/Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/gen/com/cbmvc/app/CoderblogAppInfo.java" "/Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/gen/com/cbmvc/app/CoderblogApplication.java" "/Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/gen/com/cbmvc/app/R.java"
+[DEBUG] Building Java Sources: "/Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/gen/com/cbmvc/app/CoderblogActivity.java" "/Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/gen/com/cbmvc/app/CoderblogAppInfo.java" "/Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/gen/com/cbmvc/app/CoderblogApplication.java" "/Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/gen/com/cbmvc/app/R.java"
 [INFO] Waiting for SDCard to become available..
 [INFO] Compiling Android Resources... This could take some time
 [DEBUG] Android classes.dex built
@@ -150,33 +125,34 @@ Logfile initialized
 [DEBUG] from resource zip => res/drawable-notlong-port-hdpi/background.png
 [DEBUG] from resource zip => res/drawable-notlong-port-ldpi/background.png
 [DEBUG] from resource zip => res/drawable-notlong-port-mdpi/background.png
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/modules/titanium-facebook.jar => ti/modules/titanium/facebook/LICENSE
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.js
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.min.js
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/json2.js
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/thirdparty.jar => org/apache/Commons-NOTICE.txt
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/thirdparty.jar => org/apache/HttpComponents-NOTICE.txt
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/thirdparty.jar => org/apache/mime4j-NOTICE.txt
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/titanium.jar => org/appcelerator/titanium/build.properties
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/titanium.jar => org/appcelerator/titanium/res/drawable/background.png
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on.png
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_18.png
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_48.png
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more.png
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_18.png
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_48.png
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_normal.9.png
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_pressed.9.png
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_selected.9.png
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/titanium.jar => org/appcelerator/titanium/res/drawable/default_icon.png
-[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.0.v20120702172246/android/titanium.jar => org/appcelerator/titanium/res/drawable/photoDefault.png
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/thirdparty.jar => org/apache/Commons-NOTICE.txt
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/thirdparty.jar => org/apache/HttpComponents-NOTICE.txt
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/thirdparty.jar => org/apache/mime4j-NOTICE.txt
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/titanium.jar => org/appcelerator/titanium/build.properties
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/background.png
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on.png
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_18.png
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_48.png
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more.png
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_18.png
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_48.png
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_normal.9.png
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_pressed.9.png
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_selected.9.png
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/default_icon.png
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/titanium.jar => org/appcelerator/titanium/res/drawable/photoDefault.png
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.js
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.min.js
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/json2.js
+[DEBUG] from JAR /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/modules/titanium-facebook.jar => ti/modules/titanium/facebook/LICENSE
 [DEBUG] installing native SDK libs
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 1 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.019051 seconds on emulator to get ready
+[DEBUG] waited 0.027364 seconds on emulator to get ready
 [INFO] Installing application on emulator
 [INFO] Launching application ... CoderBlog
 [TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.cbmvc.app/.CoderblogActivity }
 
 [INFO] Deployed CoderBlog ... Application should be running.
+[INFO] Android Emulator has exited

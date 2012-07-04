@@ -31,7 +31,7 @@ var CB = {
 	/**
 	 * The app's name
 	 */
-	AppName : '',
+	AppName : 'CBMVC',
 	/**
 	 * Launch the app, or only refresh a page
 	 * @param {String} controllers, should be a string and split with a comma, etc. 'home','login'
@@ -39,9 +39,14 @@ var CB = {
 	 * @param {String} animate
 	 */
 	Launch : function(controllers, isRefreshSinglePage, animate) {
-
+		//set default language
 		CB.Util.setDefaultLang(CB.DefaultLang);
+		
+		//init the debug mode
 		CB.Debug.init(CB.DebugMode.sys);
+		
+		//init the models
+		CB.DB.models.initialize();
 
 		if (isRefreshSinglePage) {
 			//just referesh a page(view)

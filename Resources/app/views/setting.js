@@ -24,9 +24,26 @@ __exports = (function() {
 	view.backBtn = Ti.UI.createButton(CB.Styles[view.name].backBtn);
 	view.add(view.backBtn);
 
-	view.table = Ti.UI.createTableView(CB.Styles[view.name].table);
+	view.insertBtn = Ti.UI.createButton(CB.Styles[view.name].insertBtn);
+	view.add(view.insertBtn);
 	
-	view.add(view.table);
+	view.delBtn = Ti.UI.createButton(CB.Styles[view.name].delBtn);
+	view.add(view.delBtn);
+	
+	view.editBtn = Ti.UI.createButton(CB.Styles[view.name].editBtn);
+	view.add(view.editBtn);
+	
+	view.queryBtn = Ti.UI.createButton(CB.Styles[view.name].queryBtn);
+	view.add(view.queryBtn);
+	
+	view.textCityId = Ti.UI.createTextField(CB.Styles[view.name].textCityId);
+	view.add(view.textCityId);
+	
+	view.textFirstName = Ti.UI.createTextField(CB.Styles[view.name].textFirstName);
+	view.add(view.textFirstName);
+	
+	
+	view.add(Ti.UI.createLabel(CB.Styles[view.name].desc));	
 
 	return view;
 })();

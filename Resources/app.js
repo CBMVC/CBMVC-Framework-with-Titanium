@@ -64,8 +64,6 @@ CB.DebugMode = {
 //load the controllers, the main controller must be the last one
 var controllers = ['home','setting','mainFrame'];
 
-CB.DB.models.initialize();
-
 //launch the app
 CB.Launch(controllers);
 

@@ -150,7 +150,7 @@ CB.Styles = {
 				fontSize : '17dp',
 				fontWeight : 'bold'
 			},
-			title: 'Go Next'
+			title: 'DB Testing'
 		},
 		switchLangBtn : {
 			top : '30%',
@@ -179,6 +179,30 @@ CB.Styles = {
 			title : 'Back',
 			color : '#000'
 		},
+		insertBtn : {
+			top : '10%',
+			left : '7%',
+			title : 'Insert Testing',
+			color : '#000'
+		},
+		delBtn : {
+			top : '20%',
+			left : '7%',
+			title : 'Del Testing',
+			color : '#000'
+		},
+		editBtn : {
+			top : '30%',
+			left : '7%',
+			title : 'Edit Testing',
+			color : '#000'
+		},
+		queryBtn : {
+			top : '40%',
+			left : '7%',
+			title : 'Query FirstName',
+			color : '#000'
+		},
 		rowText : {
 			left : '28%',
 			width : '55%',
@@ -188,6 +212,33 @@ CB.Styles = {
 				fontSize : '14dp',
 				fontWeight : 'bold'
 			}
+		},
+		textCityId : {
+			hintText : 'city id(query,edit,del)',
+			height : '9%',
+			top : '20%',
+			right : '1%',
+			width : '55%',
+			borderStyle : Ti.UI.INPUT_BORDERSTYLE_ROUNDED
+		},
+		textFirstName : {
+			hintText : 'first name(update)',
+			height : '9%',
+			top : '30%',
+			right : '1%',
+			width : '55%',
+			borderStyle : Ti.UI.INPUT_BORDERSTYLE_ROUNDED
+		},
+		desc : {
+			width : '80%',
+			bottom: '20%',
+			textAlign : 'center',
+			color : 'blue',
+			font : {
+				fontSize : '18dp',
+				fontWeight : 'bold'
+			},
+			text: 'Please look at the console to display the result after click the above buttons!'
 		}
 	}
 
