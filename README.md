@@ -338,9 +338,6 @@ I just introduce how to use joli within CBMVC:
 
 1. Setup your database's name in /Resources/app/base/core.js file:
 
-	/**
-	* Data model
-	*/
 	Models : {
 		dbName : 'coderblog'
 	}
