@@ -330,8 +330,71 @@ Handle Ajax Callback (/Resources/app/controllers/serviceCategory.js):
 	}
 	    ...
 
+9. How to use models:
+------------------------------------------		
+CBMVC use joli for data models, so you can to https://github.com/xavierlacot/joli.js for the details.
+
+I just introduce how to use joli within CBMVC:
+
+1. Setup your database's name in /Resources/app/base/core.js file:
+	/**
+	 * Data model
+	 */
+	Models : {
+		dbName : 'coderblog'
+	}
+
+2. Create a model and map your database table:
+
+/Resources/app/base/models.js
+	CB.Models = (function() {
+  		var m = {};
+  		//create table sturcture
+		m.human = new CB.DB.model({
+		    table:    'human',
+		    columns:  {
+		      id:                 'INTEGER PRIMARY KEY AUTOINCREMENT',
+		      city_id:            'INTEGER',
+		      first_name:         'TEXT',
+		      last_name:          'TEXT'
+		    },
+		    //the method of table object
+			methods : {
+					getByFirstName : function(firstName) {
+						// get by firstName
+						var result = CB.DB.models.get('human').findOneBy('first_name', firstName);
 		
-9. How to localization:
+						if (!result) {
+							throw 'Could not find a firstName  with the  ' + firstName + '!';
+						} else {
+							return result;
+						}
+					}
+				}
+		  });
+	});
+
+then you can use joli's syntax to operate the database:
+
+	//insert record
+	CB.Models.human.newRecord(properties).save();
+	
+	//edit record
+	var result = new CB.DB.query().update('human').set({
+		 first_name : e.view.textFirstName.value
+	}).where(' city_id = ?', e.view.textCityId.value).execute();
+	
+	//delete record
+	var q = new CB.DB.query().destroy().from('human').
+			where(' city_id = ?', e.view.textCityId.value).execute();
+	
+	//query record
+	var mp = CB.Models.human.getByFirstName(e.view.textFirstName.value);
+
+that's all, for the joli details, please download the joli sample project for your reference :)
+			
+
+10. How to localization:
 ------------------------------------------
 The framework can support multiple language, and can be effective immediately after changed the language:
 
