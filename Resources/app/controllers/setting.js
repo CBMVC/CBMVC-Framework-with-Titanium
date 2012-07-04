@@ -69,7 +69,8 @@ __exports.viewLoaded = function(e) {
 
 	this.view.delBtn.addEventListener('click', function() {
 		if (e.view.textCityId.value != '') {
-			var q = new CB.DB.query().destroy().from('human').where(' city_id = ?', e.view.textCityId.value).execute();
+			var q = new CB.DB.query().destroy().from('human').
+			where(' city_id = ?', e.view.textCityId.value).execute();
 		}
 		e.showRecords();
 	});

@@ -300,16 +300,15 @@ Call getRemoteData function (/Resources/app/base/common.js):
 
 	/**
 	 * Get date with remote API function
-	 * @param {String} api, the API's name 
+	 * @param {String} api, the API's name
 	 * @param {Object} controller, which controller need to show after got data
 	 * @param {Boolean} saveData, save response data to local storage or just pass data to next view
-	 * 	'true', save in local storage
-	 * 	'false', just pass data to controller.model to next view (default)
+	 * 					true, save in local storage
+	 * 					false, just pass data to controller.model to next view
 	 * @param {String} animate
-	 */ getRemoteData : function(api, controller, animate)
-	
-	//get the user info with info api and redirect to service category view
-	CB.Common.getRemoteData('info', CB.controllers.serviceCategory);
+ 	 * @param {Object} requestData, the data need to be pass to server (except user session_id and user_key)
+	 */
+	CB.Common.getRemoteData : function(api, controller, saveData, animate, requestData)
 
 
 after that, you can access the user info data within service category controller :
