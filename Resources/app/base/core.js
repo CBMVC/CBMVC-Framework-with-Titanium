@@ -81,7 +81,7 @@ var CB = {
 			CB.controllers = [];
 
 			CB.includeControllers(__controllers);
-			CB.setRootController(CB.controllers[CB.RootController], animate);
+			CB.setRootController(CB.controllers[CB.RootController], animate); 
 			CB.openWindow();
 		}
 	},
