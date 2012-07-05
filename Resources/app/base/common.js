@@ -312,7 +312,7 @@ CB.Common = {
 			top : 0
 		}, function() {
 			mainView.mainFrame.left = -(CB.screenWidth - (CB.screenWidth * 0.2));
-
+			
 			if (block !== undefined)
 				block();
 		});
