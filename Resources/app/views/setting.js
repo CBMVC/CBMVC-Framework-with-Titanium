@@ -17,7 +17,7 @@
 
 __exports = (function() {
 	var view = Ti.UI.createView(CB.Styles.common.baseView);
-	view.name = 'setting';
+	view.name = __exports.viewName;
 
 	CB.Common.addMenu(view);
 

@@ -27,6 +27,10 @@ var CB = {
 	 * The framework's version
 	 */
 	Version: '1.0',
+	/**
+	 * the root controller, can be set in app.js
+	 */
+	RootController : 'home',
 
 	/**
 	 * The app's name
@@ -77,7 +81,7 @@ var CB = {
 			CB.controllers = [];
 
 			CB.includeControllers(__controllers);
-			CB.setRootController(CB.controllers.home, animate);
+			CB.setRootController(CB.RootController, animate);
 			CB.openWindow();
 		}
 	},
@@ -276,20 +280,26 @@ Ti.include('/app/base/lib.js');
 	 * 	down: for move to down animation, default move to left
 	 */
 	CB.pushController = function(/*Controller*/controller, animate) {
+		
+		if (CB.Plugins._.include(CB.stackOfControllers, controller)) {
+			var aIndex = CB.Plugins._.indexOf(CB.stackOfControllers, controller);
+			CB.stackOfControllers.splice(aIndex, 1);
+		}
 
 		var previous = (CB.stackOfControllers.length == 0) ? null : CB.stackOfControllers[CB.stackOfControllers.length - 1];
 		CB.stackOfControllers.push(controller);
 
 		controller.view.top = 0;
-		/*
-		 if (previous === null) {
-		 controller.view.left = 0;
-		 CB.mainView.add(controller.view);
-		 return;
-		 }*/
-
+		
 		var animationTop = 0;
 		var animationLeft = CB.mainView.left - CB.screenWidth;
+		
+		//remove existing view at first
+		for (var viewIndex in CB.mainView.children) {
+			if (CB.mainView.children[viewIndex].name == controller.view.name) {
+				CB.mainView.remove(controller.view);
+			}
+		}
 
 		if (animate === 'none') {
 			controller.view.left = 0;
@@ -458,8 +468,10 @@ Ti.include('/app/base/lib.js');
 		CB.pushController(controller, animate);
 	};
 
-	CB.require = function(path) {
-		__exports = {};
+	CB.require = function(path, viewName) {
+		__exports = {
+			viewName: viewName
+		};
 		Ti.include(path + '.js');
 		return __exports;
 	};
@@ -506,7 +518,7 @@ Ti.include('/app/base/lib.js');
 
 		CB.mixin(this, functions);
 
-		this.view = CB.require('/app/views/' + name);
+		this.view = CB.require('/app/views/' + name, name);
 
 		this.view.left = 0;
 		this.view.top = 0;

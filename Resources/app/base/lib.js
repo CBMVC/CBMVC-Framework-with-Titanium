@@ -18,6 +18,8 @@
 
 //init the commonJS modules
 (function(){
+	CB.Plugins._ = require('/app/plugins/underscore');
+	
 	CB.Debug = require('/app/modules/debug');
 	
 	CB.Util = require('/app/modules/util');
