@@ -62,7 +62,7 @@ CB.DebugMode = {
 }
 
 //load the controllers, the main controller must be the last one
-var controllers = ['home','setting','mainFrame'];
+var controllers = ['home','setting'];
 
 CB.RootController = 'home';
 

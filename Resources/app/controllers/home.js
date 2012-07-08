@@ -17,12 +17,13 @@
 
 __exports.viewLoaded = function(e) {
 
+
 	//var currLang = CB.Util.getCurrLang();
-	this.view.goBtn.addEventListener('click', function() {
+	this.view.contentView.goBtn.addEventListener('click', function() {
 		CB.pushController(CB.controllers.setting);
 	});
 	
-	this.view.switchLangBtn.addEventListener('click', function() {
+	this.view.contentView.switchLangBtn.addEventListener('click', function() {
 		var currLang = CB.Util.getCurrLang();
 		if(currLang == 'en'){
 			CB.Util.switchLang('cn');
@@ -33,9 +34,7 @@ __exports.viewLoaded = function(e) {
 	});
 	
 
-	this.view.refreshBtn.addEventListener('click', function() {
-		CB.Launch(null, null, 'up');
-	});
+	
 	
 	this.view.john2 = CB.DB.models.get('human').newRecord({
       first_name: 'John',
@@ -49,13 +48,18 @@ __exports.viewLoaded = function(e) {
       last_name: 'Sure'
     });
     this.view.sarah2.save();
-    
+
+   this.view.contentView.refreshBtn.addEventListener('click', function() {
+		CB.Launch(null, null, 'up');
+	});
+	
+	
    
 };
 
 __exports.viewWillAppear = function(e) {
 	if(e != undefined){		
-		CB.Common.setCurrMenu(e.view, CB.Styles.menuSelectedTop.home);
-		CB.Common.closeMenu(e.view);
+		CB.Common.setCurrMenu(e.view.mainFrame, CB.Styles.menuSelectedTop.home);
+		CB.Common.closeMenu(e.view.mainFrame);
 	}
 }; 

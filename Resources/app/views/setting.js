@@ -16,31 +16,29 @@
  */
 
 __exports = (function() {
-	var view = Ti.UI.createView(CB.Styles.common.baseView);
-	view.name = __exports.viewName;
+	
+	var view  = CB.Common.UI.createBaseViewWithMenu(__exports.viewName);
 
-	CB.Common.addMenu(view);
+	view.contentView.backBtn = Ti.UI.createButton(CB.Styles[view.name].backBtn);
+	view.contentView.add(view.contentView.backBtn);
 
-	view.backBtn = Ti.UI.createButton(CB.Styles[view.name].backBtn);
-	view.add(view.backBtn);
-
-	view.insertBtn = Ti.UI.createButton(CB.Styles[view.name].insertBtn);
-	view.add(view.insertBtn);
+	view.contentView.insertBtn = Ti.UI.createButton(CB.Styles[view.name].insertBtn);
+	view.contentView.add(view.contentView.insertBtn);
 	
-	view.delBtn = Ti.UI.createButton(CB.Styles[view.name].delBtn);
-	view.add(view.delBtn);
+	view.contentView.delBtn = Ti.UI.createButton(CB.Styles[view.name].delBtn);
+	view.contentView.add(view.contentView.delBtn);
 	
-	view.editBtn = Ti.UI.createButton(CB.Styles[view.name].editBtn);
-	view.add(view.editBtn);
+	view.contentView.editBtn = Ti.UI.createButton(CB.Styles[view.name].editBtn);
+	view.contentView.add(view.contentView.editBtn);
 	
-	view.queryBtn = Ti.UI.createButton(CB.Styles[view.name].queryBtn);
-	view.add(view.queryBtn);
+	view.contentView.queryBtn = Ti.UI.createButton(CB.Styles[view.name].queryBtn);
+	view.contentView.add(view.contentView.queryBtn);
 	
-	view.textCityId = Ti.UI.createTextField(CB.Styles[view.name].textCityId);
-	view.add(view.textCityId);
+	view.contentView.textCityId = Ti.UI.createTextField(CB.Styles[view.name].textCityId);
+	view.contentView.add(view.contentView.textCityId);
 	
-	view.textFirstName = Ti.UI.createTextField(CB.Styles[view.name].textFirstName);
-	view.add(view.textFirstName);
+	view.contentView.textFirstName = Ti.UI.createTextField(CB.Styles[view.name].textFirstName);
+	view.contentView.add(view.contentView.textFirstName);
 	
 	
 	view.add(Ti.UI.createLabel(CB.Styles[view.name].desc));	

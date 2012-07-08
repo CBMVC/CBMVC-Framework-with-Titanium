@@ -192,7 +192,7 @@ Ti.include('/app/base/lib.js');
 	CB.screenHeight = Ti.Platform.displayCaps.platformHeight;
 	
 	//the menu frame's left
-	CB.menuLeft = -(CB.screenWidth - (CB.screenWidth * 0.07));
+	CB.menuLeft = (CB.screenWidth * 0.07);
 
 	CB.mainWindow = Ti.UI.createWindow({
 		title : 'Main',

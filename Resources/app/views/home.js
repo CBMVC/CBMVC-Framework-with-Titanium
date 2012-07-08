@@ -17,26 +17,23 @@
 
 __exports = (function() {
 
-	var view = Ti.UI.createView(CB.Styles.common.baseView);
-	view.name = __exports.viewName;
-	
-	CB.Common.addMenu(view);
+	var view  = CB.Common.UI.createBaseViewWithMenu(__exports.viewName);
 
-	view.add(Ti.UI.createLabel(CB.Styles[view.name].logo));	
+	view.contentView.add(Ti.UI.createLabel(CB.Styles[view.name].logo));	
 	
-	view.goBtn = Ti.UI.createButton(CB.Styles[view.name].goBtn);
-	view.add(view.goBtn);
+	view.contentView.goBtn = Ti.UI.createButton(CB.Styles[view.name].goBtn);
+	view.contentView.add(view.contentView.goBtn);
 	
-	view.switchLangBtn = Ti.UI.createButton(CB.Styles[view.name].switchLangBtn);
-	view.add(view.switchLangBtn);
+	view.contentView.switchLangBtn = Ti.UI.createButton(CB.Styles[view.name].switchLangBtn);
+	view.contentView.add(view.contentView.switchLangBtn);
 	
 
-	view.refreshBtn = Ti.UI.createButton({
+	view.contentView.refreshBtn = Ti.UI.createButton({
 		bottom: '20%',
 		title : 'Refresh',
 		color : '#000'
 	});
-	view.add(view.refreshBtn);
+	view.contentView.add(view.contentView.refreshBtn);
 
 	return view;
 })();

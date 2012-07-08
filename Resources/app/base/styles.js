@@ -43,6 +43,11 @@ CB.Styles = {
 		borderWidth : 1,
 		borderColor : 'blue'
 	}
+	,
+	debugLayoutRed : {
+		borderWidth : 1,
+		borderColor : 'red'
+	}
 };
 
 (function() {
@@ -52,6 +57,9 @@ CB.Styles = {
 	CB.Styles.common = {
 		baseView : {
 			width : CB.screenWidth,
+			//left : (CB.screenWidth * 0.07),
+			right: 0,
+			top: 0,
 			//if show the statusbar, then need to minus the statusbar height
 			height : (CB.screenHeight - CB.screenHeight * 0.02),
 			backgroundImage : CB.Styles.imagePath + 'bg.jpg'
@@ -72,25 +80,24 @@ CB.Styles = {
 	CB.Styles.menu = {
 		baseView : {
 			width : CB.screenWidth,
-			//if show the statusbar, then need to minus the statusbar height
 			height : (CB.screenHeight - CB.screenHeight * 0.02),
 			backgroundImage : CB.Styles.imagePath + 'bg.jpg'
 		},
 		mainFrame:{
-			left: -CB.screenWidth,
+			left: -CB.screenWidth * 1,
 			top: 0,
-			width: CB.screenWidth,
+			width: CB.screenWidth * 2,
 			height: CB.screenHeight,
-			zIndex: 999
+			//zIndex: 999
 		},
 		mainMenu : {
 			title:'Menu',
-		    left: 0,
+		    left: CB.menuLeft,
 		    top: 0,
 		    width: CB.screenWidth,
 		    height: CB.screenHeight,
-		    backgroundColor:'#fff',
-		    backgroundImage : CB.Styles.imagePath + 'bg.jpg'
+		    backgroundImage : CB.Styles.imagePath + 'bg.jpg',
+		    zIndex:999
 		},
 		mainMenuBar : {
 		    right: 0,
@@ -256,7 +263,7 @@ CB.Styles = {
 	 */
 	if (CB.DebugMode.style) {
 		//home's debug layout:
-		CB.Platform.extend(CB.Styles.home.logo, CB.Styles.debugLayout);
-
+		CB.Platform.extend(CB.Styles.menu.mainMenu, CB.Styles.debugLayout);
+		CB.Platform.extend(CB.Styles.menu.mainFrame, CB.Styles.debugLayoutRed);
 	}
 })();

@@ -17,11 +17,11 @@
 
 __exports.viewLoaded = function(e) {
 
-	this.view.backBtn.addEventListener('click', function() {
+	this.view.contentView.backBtn.addEventListener('click', function() {
 		CB.popController();
 	});
 
-	this.view.insertBtn.addEventListener('click', function() {
+	this.view.contentView.insertBtn.addEventListener('click', function() {
 		//truncate the table at first
 		CB.Models.human.truncate();
 
@@ -55,29 +55,29 @@ __exports.viewLoaded = function(e) {
 
 	});
 
-	this.view.editBtn.addEventListener('click', function() {
-		if (e.view.textCityId.value != '' && e.view.textFirstName.value != '') {
+	this.view.contentView.editBtn.addEventListener('click', function() {
+		if (e.view.contentView.textCityId.value != '' && e.view.contentView.textFirstName.value != '') {
 
 			var result = new CB.DB.query().update('human').set({
-				first_name : e.view.textFirstName.value
-			}).where(' city_id = ?', e.view.textCityId.value).execute();
+				first_name : e.view.contentView.textFirstName.value
+			}).where(' city_id = ?', e.view.contentView.textCityId.value).execute();
 
 		}
 
 		e.showRecords();
 	});
 
-	this.view.delBtn.addEventListener('click', function() {
-		if (e.view.textCityId.value != '') {
+	this.view.contentView.delBtn.addEventListener('click', function() {
+		if (e.view.contentView.textCityId.value != '') {
 			var q = new CB.DB.query().destroy().from('human').
-			where(' city_id = ?', e.view.textCityId.value).execute();
+			where(' city_id = ?', e.view.contentView.textCityId.value).execute();
 		}
 		e.showRecords();
 	});
 
-	this.view.queryBtn.addEventListener('click', function() {
-		if (e.view.textFirstName.value != '') {
-			var mp = CB.Models.human.getByFirstName(e.view.textFirstName.value);
+	this.view.contentView.queryBtn.addEventListener('click', function() {
+		if (e.view.contentView.textFirstName.value != '') {
+			var mp = CB.Models.human.getByFirstName(e.view.contentView.textFirstName.value);
 			CB.Debug.dump(mp, 80, 'setting.js');
 		}
 	});
@@ -105,8 +105,8 @@ __exports.viewWillAppear = function(e) {
 	if (e != undefined) {
 		//add a refresh button for testing layout
 		CB.Debug.addRefreshBtn(CB, e.view);
-		CB.Common.setCurrMenu(e.view, CB.Styles.menuSelectedTop.setting);
-		CB.Common.closeMenu(e.view);
+		CB.Common.setCurrMenu(e.view.mainFrame, CB.Styles.menuSelectedTop.setting);
+		CB.Common.closeMenu(e.view.mainFrame);
 	}
 };
 

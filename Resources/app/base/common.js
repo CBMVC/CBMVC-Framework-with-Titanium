@@ -3,15 +3,15 @@
  * @author Winson  winsonet@gmail.com
  * @copyright Winson http://www.coderblog.in
  * @license MIT License http://www.opensource.org/licenses/mit-license.php
- * 
- * @disclaimer THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
- * IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * 	PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
+ *
+ * @disclaimer THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ * IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * 	PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
@@ -19,11 +19,11 @@
  * Common functions for all controllers and views
  */
 CB.Common = {
-	UI:{
+	UI : {
 		/**
-		 * Create a dropdown list within a web view 
+		 * Create a dropdown list within a web view
 		 * @param {Object} view, which view need to add the dropdown list object
-		 * 
+		 *
 		 * view.ddlArgs = {
 		 * 	id : ddl object id,
 		 *  innerWidth: webview ddl width,
@@ -40,24 +40,20 @@ CB.Common = {
 		 *  callback : the call back function
 		 * }
 		 */
-		createDropDownList : function(view){
+		createDropDownList : function(view) {
 			var html = "<html><meta name='viewport' content='user-scalable=0'><body bgcolor='#5a5c64' style='margin:0;padding:0'>";
-				html += "<select id='{0}' style='width: {1}px; height: {2}px; font-size: {3}px; '>";
-				for(var itemIndex in view.ddlArgs.items){
-					html += "<option value=\"{0}\">{1}</option>".format(view.ddlArgs.items[itemIndex].value, view.ddlArgs.items[itemIndex].text);
-				}
-				html += "</select>";
-				html += "<script type='text/javascript'>";
-				html += "document.getElementById('{0}').onchange = function(){ Titanium.App.fireEvent('app:set{0}',{value:this.value}); };";
-				html += "</script>";
-				html += "</body></html>";
-			
-			
-			html = html.format(view.ddlArgs.id, 
-							   view.ddlArgs.innerWidth, 
-							   view.ddlArgs.innerHeight, 
-							   view.ddlArgs.innerFontSize == undefined ? '12' : view.ddlArgs.innerFontSize);
-			
+			html += "<select id='{0}' style='width: {1}px; height: {2}px; font-size: {3}px; '>";
+			for (var itemIndex in view.ddlArgs.items) {
+				html += "<option value=\"{0}\">{1}</option>".format(view.ddlArgs.items[itemIndex].value, view.ddlArgs.items[itemIndex].text);
+			}
+			html += "</select>";
+			html += "<script type='text/javascript'>";
+			html += "document.getElementById('{0}').onchange = function(){ Titanium.App.fireEvent('app:set{0}',{value:this.value}); };";
+			html += "</script>";
+			html += "</body></html>";
+
+			html = html.format(view.ddlArgs.id, view.ddlArgs.innerWidth, view.ddlArgs.innerHeight, view.ddlArgs.innerFontSize == undefined ? '12' : view.ddlArgs.innerFontSize);
+
 			view[view.ddlArgs.id + 'WebView'] = Ti.UI.createWebView({
 				top : view.ddlArgs.top,
 				left : view.ddlArgs.left,
@@ -66,11 +62,77 @@ CB.Common = {
 				html : html
 			});
 			view.add(view[view.ddlArgs.id + 'WebView']);
-			
+
 			Ti.App.addEventListener("app:set" + view.ddlArgs.id, function(e) {
 				view.ddlArgs.callback(e);
 			});
-				
+		},
+		/**
+		 * Create base with a left menu.
+		 * return the view and there are two sub view in it:
+		 * view.mainFrame : this is the menu layout view
+		 * view.contentView : this is a view of layout element, you must add all element within this view
+		 * 
+		 * @param {String} viewName
+		 */
+		createBaseViewWithMenu : function(viewName) {
+			var mainView = Ti.UI.createView();
+			
+			mainView.mainFrame = Ti.UI.createView(CB.Styles.menu.mainFrame);
+			mainView.add(mainView.mainFrame);
+			
+			mainView.contentView = Ti.UI.createView(CB.Styles.common.baseView);
+			mainView.name = viewName;
+			mainView.mainFrame.add(mainView.contentView);
+
+			//menu layout
+			mainView.mainFrame.mainMenu = Titanium.UI.createView(CB.Styles.menu.mainMenu);
+			mainView.mainFrame.add(mainView.mainFrame.mainMenu);
+
+			mainView.mainFrame.mainMenu.mainMenuBar = Titanium.UI.createView(CB.Styles.menu.mainMenuBar);
+			mainView.mainFrame.mainMenu.add(mainView.mainFrame.mainMenu.mainMenuBar);
+
+			mainView.mainFrame.mainMenu.mainMenuBar.menuSelected = Ti.UI.createView(CB.Styles.menu.menuSelected);
+
+			mainView.mainFrame.mainMenu.menuBtn = Ti.UI.createButton(CB.Styles.menu.menuBtn);
+			mainView.mainFrame.mainMenu.add(mainView.mainFrame.mainMenu.menuBtn);
+
+			//menu buttons
+			mainView.mainFrame.mainMenu.mainMenuBar.homeBtn = Ti.UI.createButton(CB.Styles.menu.homeBtn);
+			mainView.mainFrame.mainMenu.add(mainView.mainFrame.mainMenu.mainMenuBar.homeBtn);
+
+			mainView.mainFrame.mainMenu.mainMenuBar.settingBtn = Ti.UI.createButton(CB.Styles.menu.settingBtn);
+			mainView.mainFrame.mainMenu.add(mainView.mainFrame.mainMenu.mainMenuBar.settingBtn);
+
+
+			//menu events
+			mainView.mainFrame.addEventListener('click', function(e) {
+				CB.Debug.dump(e.source, 98, 'common.js');
+				//just click on the view
+				if (e.source != undefined) {
+					CB.Common.toggleMenu(mainView.mainFrame);
+				}
+			});
+
+			mainView.mainFrame.mainMenu.menuBtn.addEventListener('click', function() {
+				CB.Common.toggleMenu(mainView.mainFrame);
+			});
+
+			mainView.mainFrame.mainMenu.mainMenuBar.addEventListener('click', function() {
+				CB.Common.toggleMenu(mainView.mainFrame);
+			});
+
+			mainView.mainFrame.mainMenu.mainMenuBar.homeBtn.addEventListener('click', function() {
+				//CB.controllers.mainFrame.toggleMenu();
+				CB.Launch(null, null, 'left');
+			});
+
+			mainView.mainFrame.mainMenu.mainMenuBar.settingBtn.addEventListener('click', function() {
+				CB.pushController(CB.controllers.setting);
+			});
+
+			//this.setCurrMenu(mainView);
+			return mainView;
 		}
 	},
 	/**
@@ -135,7 +197,7 @@ CB.Common = {
 	 * 					true, save in local storage
 	 * 					false, just pass data to controller.model to next view
 	 * @param {String} animate
- 	 * @param {Object} requestData, the data need to be pass to server (except user session_id and user_key)
+	 * @param {Object} requestData, the data need to be pass to server (except user session_id and user_key)
 	 */
 	getRemoteData : function(api, controller, saveData, animate, requestData) {
 		//get login user
@@ -177,7 +239,7 @@ CB.Common = {
 					}
 				}
 			}
-			if(requestData != undefined){
+			if (requestData != undefined) {
 				CB.Platform.extend(ajaxObj.data, requestData);
 			}
 			CB.Ajax.request(ajaxObj);
@@ -204,81 +266,23 @@ CB.Common = {
 	viewFooter : function(view) {
 		//common layout functions and elements within footer
 	},
-	/**
-	 * Add a left menu within the view
- 	 * @param {Object} mainView
-	 */
-	addMenu : function(mainView) {
-		
-		mainView.mainFrame = Titanium.UI.createView(CB.Styles.menu.mainFrame);
-		mainView.mainFrame.left = CB.menuLeft;
-		
-		mainView.add(mainView.mainFrame);
-		
-		//menu layout
-		mainView.mainMenu = Titanium.UI.createView(CB.Styles.menu.mainMenu);
-		mainView.mainFrame.add(mainView.mainMenu);
 
-		mainView.mainMenu.mainMenuBar = Titanium.UI.createView(CB.Styles.menu.mainMenuBar);
-		mainView.mainMenu.add(mainView.mainMenu.mainMenuBar);
-
-		mainView.mainMenu.mainMenuBar.menuSelected = Ti.UI.createView(CB.Styles.menu.menuSelected);
-
-		mainView.mainMenu.menuBtn = Ti.UI.createButton(CB.Styles.menu.menuBtn);
-		mainView.mainMenu.add(mainView.mainMenu.menuBtn);
-
-		//menu buttons
-		mainView.mainMenu.mainMenuBar.homeBtn = Ti.UI.createButton(CB.Styles.menu.homeBtn);
-		mainView.mainMenu.add(mainView.mainMenu.mainMenuBar.homeBtn);
-
-		mainView.mainMenu.mainMenuBar.settingBtn = Ti.UI.createButton(CB.Styles.menu.settingBtn);
-		mainView.mainMenu.add(mainView.mainMenu.mainMenuBar.settingBtn);
-		
-		mainView.left = CB.menuLeft;
-		
-		//menu events
-		mainView.addEventListener('click', function(e) {
-			CB.Debug.dump(e.source,241, 'common.js');
-			//just click on the view
-			if(e.source.mainFrame != undefined){
-				CB.Common.toggleMenu(mainView);
-			}
-		});
-		
-		mainView.mainMenu.menuBtn.addEventListener('click', function() {
-			CB.Common.toggleMenu(mainView);
-		});
-		
-		mainView.mainMenu.mainMenuBar.addEventListener('click', function() {
-			CB.Common.toggleMenu(mainView);
-		});
-		
-		mainView.mainMenu.mainMenuBar.homeBtn.addEventListener('click', function() {
-			//CB.controllers.mainFrame.toggleMenu();
-			CB.Launch(null, null, 'left');
-		});
-		
-		mainView.mainMenu.mainMenuBar.settingBtn.addEventListener('click', function() {
-			CB.pushController(CB.controllers.setting);
-		});
-		
-		this.setCurrMenu(mainView);
-	},
-	setCurrMenu: function(mainView, currMenu){
+	
+	setCurrMenu : function(mainView, currMenu) {
 		mainView.mainMenu.mainMenuBar.menuSelected.top = currMenu;
-		CB.Util.saveObject('currMenu',currMenu);
+		CB.Util.saveObject('currMenu', currMenu);
 	},
-	showCurrMenu : function(mainView){
+	showCurrMenu : function(mainView) {
 		var currMenu = CB.Util.loadObject('currMenu');
-		if(currMenu == undefined){
+		if (currMenu == undefined) {
 			currMenu = CB.Styles.menuSelectedTop.home;
 		}
 		mainView.mainMenu.mainMenuBar.menuSelected.top = currMenu;
 	},
 	isMenuOpen : function(mainView) {
-		return (mainView.mainFrame.left == CB.menuLeft);
+		return (mainView.left == -CB.screenWidth);
 	},
-	toggleMenu : function(mainView,block) {
+	toggleMenu : function(mainView, block) {
 		if (this.isMenuOpen(mainView)) {
 			this.openMenu(mainView, block);
 		} else {
@@ -286,33 +290,30 @@ CB.Common = {
 		}
 	},
 	closeMenu : function(mainView, block) {
-		
 		mainView.mainMenu.remove(mainView.mainMenu.mainMenuBar.menuSelected);
 		mainView.mainMenu.menuBtn.backgroundImage = CB.Styles.imagePath + 'menu-btn-right.png';
 
-		mainView.mainFrame.animate({
+		mainView.animate({
 			duration : CB.__changeControllerDuration,
-			left : CB.menuLeft,
+			left : -CB.screenWidth,
 			top : 0
 		}, function() {
-			mainView.mainFrame.left = CB.menuLeft;
+			mainView.left = -CB.screenWidth;
 
 			if (block !== undefined)
 				block();
 		});
 	},
 	openMenu : function(mainView, block) {
-
 		mainView.mainMenu.add(mainView.mainMenu.mainMenuBar.menuSelected);
 		mainView.mainMenu.menuBtn.backgroundImage = CB.Styles.imagePath + 'menu-btn-left.png';
 
-		mainView.mainFrame.animate({
+		mainView.animate({
 			duration : CB.__changeControllerDuration,
-			left : -(CB.screenWidth - (CB.screenWidth * 0.2)),
+			left : -CB.screenWidth + (CB.screenWidth * 0.13),
 			top : 0
 		}, function() {
-			mainView.mainFrame.left = -(CB.screenWidth - (CB.screenWidth * 0.2));
-			
+			mainView.left = -CB.screenWidth + (CB.screenWidth * 0.13);
 			if (block !== undefined)
 				block();
 		});
