@@ -8,9 +8,23 @@ The example project here shows you how to build navigate betweens pages (with an
 
 with this framework, please update your titanium sdk to 2.0.1 or above.
 
+## Feature
+
+1. Use MVC + commonJS structure, and use a namespace for the structure, it can avoid the memeory leak.
+2. The switch page animation can support left,right,up and down direction，and support IOS & Android.
+3. Use CB.Styles namespace for handle layout style, there is a style for each view, no need to use jss, so you can keep the view is clean.
+4. It's support refresh the current page and don't need to rebuild the app, so you can see the effect of the layout immediately after you changed the source code(just like the fastdev mode with android)
+5. Support multiple languages. You can change the language immediately within the app.
+6. Convenient and flexible debug functions. You can debug an object or just show a message, and you can add a refresh button in the view layout.
+7. You can set the API address for Ajax call with CB.API namespace.
+8. It's integraed joli ORM library, it's a powerful ORM library with javascript, there is a set of convenient and flexible syntax.
+
+
+## Usage
+
 1. Life cycle:
 ------------------------------------------
-	Launch app ==>  home view ==>  home controller
+	Launch app ==>  home view ==>  viewLoaded ==> home controller ==> viewWillAppear ==> viewDidAppear  ==> viewWillDisappear ==>  viewDidDisappear  
 
 2. How to setup a controller:
 ------------------------------------------
