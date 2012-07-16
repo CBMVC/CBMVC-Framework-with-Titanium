@@ -481,7 +481,14 @@ Ti.include('/app/base/lib.js');
 
 		//reload the styles when refresh the page
 		CB.Styles = null;
-		Ti.include('/app/base/styles.js');
+		//load default style file
+		var loadStyle = '/app/styles/styles.js';
+		//load difference platform style only
+		var styleFile = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory + 'app/styles/' + CB.Platform.osname + '.styles.js');
+		if(styleFile.exists()){
+			loadStyle = 'app/styles/'+ CB.Platform.osname + '.styles.js';
+		}
+		Ti.include(loadStyle);
 
 		for (var i = 0; i < names.length; i++) {
 			var controllerName = names[i];
