@@ -26,8 +26,6 @@ CB.Common = {
 		 *
 		 * view.ddlArgs = {
 		 * 	id : ddl object id,
-		 *  innerWidth: webview ddl width,
-		 *  innerHeight: webview ddl height,
 		 *  innerFontSize: webview ddl font size(default is 12),
 		 *  top: ddl top,
 		 *  left: ddl left,
@@ -41,20 +39,21 @@ CB.Common = {
 		 * }
 		 */
 		createDropDownList : function(view) {
-			var html = "<html><meta name='viewport' content='user-scalable=0'><body bgcolor='#5a5c64' style='margin:0;padding:0'>";
-			html += "<select id='{0}' style='width: {1}px; height: {2}px; font-size: {3}px; '>";
-			for (var itemIndex in view.ddlArgs.items) {
-				html += "<option value=\"{0}\">{1}</option>".format(view.ddlArgs.items[itemIndex].value, view.ddlArgs.items[itemIndex].text);
-			}
-			html += "</select>";
-			html += "<script type='text/javascript'>";
-			html += "document.getElementById('{0}').onchange = function(){ Titanium.App.fireEvent('app:set{0}',{value:this.value}); };";
-			html += "</script>";
-			html += "</body></html>";
+			var html = "<html><head><meta name='viewport' content='user-scalable=0, initial-scale=1, maximum-scale=1, minimum-scale=1'>"+
+							"</head><body style='background-color:transparent ;margin:0;padding:0'>";
+					html += "<select id='{0}' style='width:100%; height:100%;font-size: {1}px; '>";
+					for(var itemIndex in view.ddlArgs.items){
+						html += "<option value='{0}'>{1}</option>".format(view.ddlArgs.items[itemIndex].value, view.ddlArgs.items[itemIndex].text);
+					}
+					html += "</select>";
+					html += "<script type='text/javascript'>";
+					html += "document.getElementById('{0}').onchange = function(){ Titanium.App.fireEvent('app:set{0}',{value:this.value}); };";
+					html += "</script>";
+					html += "</body></html>";
 
 			html = html.format(view.ddlArgs.id, view.ddlArgs.innerWidth, view.ddlArgs.innerHeight, view.ddlArgs.innerFontSize == undefined ? '12' : view.ddlArgs.innerFontSize);
 
-			view[view.ddlArgs.id + 'WebView'] = Ti.UI.createWebView({
+			view[view.ddlArgs.id + 'DropDown'] = Ti.UI.createWebView({
 				top : view.ddlArgs.top,
 				left : view.ddlArgs.left,
 				width : view.ddlArgs.width,
@@ -62,6 +61,13 @@ CB.Common = {
 				html : html
 			});
 			view.add(view[view.ddlArgs.id + 'WebView']);
+			
+			view[view.ddlArgs.id + 'DropDown'].addEventListener("touchmove", function(e){
+				if(!isAndroid) {
+					e.preventDefault();
+				}
+				return false;
+			}, false);
 
 			Ti.App.addEventListener("app:set" + view.ddlArgs.id, function(e) {
 				view.ddlArgs.callback(e);
