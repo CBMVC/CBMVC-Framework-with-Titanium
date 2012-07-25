@@ -186,6 +186,7 @@ exports.getCurrLang = getCurrLang;
 exports.setDefaultLang = setDefaultLang;
 exports.trim = trim;
 exports.alert = alert;
+exports.confirm = confirm;
 exports.ucFirst = ucFirst;
 exports.saveObject = saveObject;
 exports.removeObject = removeObject;
