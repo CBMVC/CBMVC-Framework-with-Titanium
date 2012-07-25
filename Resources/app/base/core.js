@@ -297,7 +297,8 @@ Ti.include('/app/base/lib.js');
 		//remove existing view at first
 		for (var viewIndex in CB.mainView.children) {
 			
-			if (CB.mainView.children[viewIndex].name == controller.view.name) {
+			if (CB.mainView.children[viewIndex].name == controller.view.name || 
+					CB.mainView.children[viewIndex].previous == controller.view.name) {
 				var currChildren = CB.mainView.children.length;
 				CB.mainView.remove(CB.mainView.children[viewIndex]);
 				if(currChildren > 1){
@@ -312,7 +313,7 @@ Ti.include('/app/base/lib.js');
 
 			if (previous !== null) {
 				CB.mainView.remove(previous.view);
-				previous.base.viewWillDisappear(controller);
+				previous.base.viewWillDisappear(previous);
 			}
 			controller.base.viewDidAppear(controller);
 
@@ -330,7 +331,7 @@ Ti.include('/app/base/lib.js');
 
 				if (previous !== null) {
 					previous.view.left = CB.screenWidth;
-					previous.base.viewWillDisappear(controller);
+					previous.base.viewWillDisappear(previous);
 				}
 				controller.base.viewWillAppear(controller);
 			});
@@ -347,7 +348,7 @@ Ti.include('/app/base/lib.js');
 
 				if (previous !== null) {
 					previous.view.top = CB.screenHeight;
-					previous.base.viewWillDisappear(controller);
+					previous.base.viewWillDisappear(previous);
 				}
 				controller.base.viewWillAppear(controller);
 			});
@@ -364,7 +365,7 @@ Ti.include('/app/base/lib.js');
 				//CB.mainWindow.add(CB.mainOverlay);
 
 				if (previous !== null) {
-					previous.base.viewWillDisappear(controller);
+					previous.base.viewWillDisappear(previous);
 				}
 				controller.base.viewWillAppear(controller);
 			});
@@ -379,7 +380,7 @@ Ti.include('/app/base/lib.js');
 				//CB.mainWindow.add(CB.mainOverlay);
 
 				if (previous !== null) {
-					previous.base.viewWillDisappear(controller);
+					previous.base.viewWillDisappear(previous);
 				}
 				controller.base.viewWillAppear(controller);
 			});
@@ -403,7 +404,7 @@ Ti.include('/app/base/lib.js');
 
 				if (previous !== null) {
 					CB.mainView.remove(previous.view);
-					previous.base.viewWillDisappear(controller);
+					previous.base.viewWillDisappear(previous);
 				}
 				controller.base.viewDidAppear(controller);
 			});

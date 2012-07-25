@@ -21,9 +21,9 @@
 CB.Common = {
 	UI : {
 		/**
-		 * Create a dropdown list within a web view
+		 * Create a dropdown list within a web view 
 		 * @param {Object} view, which view need to add the dropdown list object
-		 *
+		 * 
 		 * view.ddlArgs = {
 		 * 	id : ddl object id,
 		 *  innerFontSize: webview ddl font size(default is 12),
@@ -38,40 +38,45 @@ CB.Common = {
 		 *  callback : the call back function
 		 * }
 		 */
-		createDropDownList : function(view) {
-			var html = "<html><head><meta name='viewport' content='user-scalable=0, initial-scale=1, maximum-scale=1, minimum-scale=1'>"+
-							"</head><body style='background-color:transparent ;margin:0;padding:0'>";
-					html += "<select id='{0}' style='width:100%; height:100%;font-size: {1}px; '>";
-					for(var itemIndex in view.ddlArgs.items){
-						html += "<option value='{0}'>{1}</option>".format(view.ddlArgs.items[itemIndex].value, view.ddlArgs.items[itemIndex].text);
-					}
-					html += "</select>";
-					html += "<script type='text/javascript'>";
-					html += "document.getElementById('{0}').onchange = function(){ Titanium.App.fireEvent('app:set{0}',{value:this.value}); };";
-					html += "</script>";
-					html += "</body></html>";
-
-			html = html.format(view.ddlArgs.id, view.ddlArgs.innerWidth, view.ddlArgs.innerHeight, view.ddlArgs.innerFontSize == undefined ? '12' : view.ddlArgs.innerFontSize);
-
+		createDropDownList : function(view){
+			var html = "<html><head>"+
+						"<meta name='viewport' content='user-scalable=0, initial-scale=1, maximum-scale=1, minimum-scale=1'>"+
+						"</head><body style='background-color:transparent ;margin:0;padding:0'>";
+				html += "<select id='{0}' style='width:100%; height:100%;font-size: {1}px; '>";
+				for(var itemIndex in view.ddlArgs.items){
+					html += "<option value='{0}' {1}>{2}</option>".format(view.ddlArgs.items[itemIndex].value,
+																		  view.ddlArgs.items[itemIndex].selected, 
+																		  view.ddlArgs.items[itemIndex].text);
+				}
+				html += "</select>";
+				html += "<script type='text/javascript'>";
+				html += "document.getElementById('{0}').onchange = function(){ Titanium.App.fireEvent('app:set{0}',{value:this.value}); };";
+				html += "</script>";
+				html += "</body></html>";
+				
+			
+			html = html.format(view.ddlArgs.id, 
+							   view.ddlArgs.innerFontSize == undefined ? '12' : view.ddlArgs.innerFontSize);
+			
+			if(view.ddlArgs.height == null || view.ddlArgs.height == undefined){
+				view.ddlArgs.height = CB.screenHeight * 0.055;
+			}
 			view[view.ddlArgs.id + 'DropDown'] = Ti.UI.createWebView({
 				top : view.ddlArgs.top,
 				left : view.ddlArgs.left,
 				width : view.ddlArgs.width,
 				height : view.ddlArgs.height,
+				scalesPageToFit:true,
 				html : html
 			});
-			view.add(view[view.ddlArgs.id + 'WebView']);
 			
-			view[view.ddlArgs.id + 'DropDown'].addEventListener("touchmove", function(e){
-				if(!isAndroid) {
-					e.preventDefault();
-				}
-				return false;
-			}, false);
-
+			view.add(view[view.ddlArgs.id + 'DropDown']);
+			
+			
 			Ti.App.addEventListener("app:set" + view.ddlArgs.id, function(e) {
 				view.ddlArgs.callback(e);
 			});
+				
 		},
 		/**
 		 * Create base with a left menu.
@@ -157,35 +162,19 @@ CB.Common = {
 				user_id : userId,
 				user_password : userPassword
 			},
-			url : CB.API.login,
+			url : CB.API.login.value,
 			onerror : function(d) {
-				CB.Debug.dump(d, 23, 'base/common.js');
+				CB.Debug.dump(d, 167, 'base/common.js');
 				alert(CB.Util.L('unknowError'));
 				CB.Platform.actInd.hide();
 			},
 			callback : function(d) {
-				CB.Debug.dump(d.login.response_details, 28, 'base/common.js');
+				CB.Debug.dump(d.login.response_details, 172, 'base/common.js');
 				CB.Platform.actInd.hide();
 
 				if (d.login.response_details != undefined) {
 					var status = d.login.response_details.status;
-					switch(status) {
-						case '1':
-							CB.Util.alert(CB.Util.L('invalidUser'), CB.Util.L('error'));
-							break;
-						case '2':
-							CB.Util.alert(CB.Util.L('wrongPassword'), CB.Util.L('error'));
-							break;
-						case '0':
-							CB.Models.User.sessionId = d.login.response_details.session_id;
-							CB.Models.User.user_key = d.login.response_details.user_key;
-							CB.Util.saveObject('user', CB.Models.User);
-							CB.Common.getRemoteData('info', controller, true);
-							break;
-						default:
-							CB.Util.alert(CB.Util.L('unknowError'), CB.Util.L('error'));
-							break;
-					}
+					CB.API.loginErrorHandle(status);
 
 				} else {
 					CB.Util.alert(CB.Util.L('unknowError'), CB.Util.L('error'));
@@ -197,66 +186,94 @@ CB.Common = {
 	},
 	/**
 	 * Get date with remote API function
-	 * @param {String} api, the API's name
-	 * @param {Object} controller, which controller need to show after got data
-	 * @param {Boolean} saveData, save response data to local storage or just pass data to next view
-	 * 					true, save in local storage
-	 * 					false, just pass data to controller.model to next view
-	 * @param {String} animate
-	 * @param {Object} requestData, the data need to be pass to server (except user session_id and user_key)
+	 * @param {Object} api: the API which need to call 
+ 	 * @param {Object} callback function
+ 	 * @param {Object} requestData: the data need to be pass to server (except user session_id and user_key)
 	 */
-	getRemoteData : function(api, controller, saveData, animate, requestData) {
-		//get login user
-		var user = CB.Util.loadObject('user');
-
-		if (user != null) {
-
-			var ajaxObj = {
-				timeout : CB.API.timeout,
-				type : 'GET',
-				data : {
-					debug : CB.DebugMode.api,
-					session_id : user.sessionId,
-					user_key : user.user_key
-				},
-				url : CB.API[api],
-				onerror : function(d) {
-					CB.Debug.dump(d, 156, 'base/common.js');
-					CB.Util.alert(CB.Util.L('unknowError'), CB.Util.L('error'));
-				},
-				callback : function(d) {
-					CB.Debug.dump(d, 160, 'base/common.js');
-					var result = d[api].response_details;
-					if (result.status == '0') {
-						if (saveData) {
-							CB.Util.removeObject(api);
-							CB.Util.saveObject(api, result);
-						} else {
-							controller.model = result;
-						}
-						CB.pushController(controller, animate);
-					} else {
-						CB.Util.removeObject('user');
-						if (saveData) {
-							CB.Util.removeObject(api);
-						}
-						CB.Util.alert(CB.Util.L('timeout'), CB.Util.L('error'));
-						CB.Launch(null, null, 'right');
+	remoteAPIData : function(api, callback, requestData) {
+		//check login at first if need
+		//var user = CB.Util.loadObject('user');
+		
+		//if (user != null) {	
+			//CB.Platform.actInd.show();
+			//get data from local storage at first, otherwise get from remote server
+			var remoteData = CB.Util.loadObject(api.name);
+			if(api.saveData && remoteData != null){
+				CB.Debug.dump(remoteData, 218, 'base/common.js');
+				callback(remoteData);
+			}else{
+				var ajaxObj = {
+					type : 'GET',
+					//common data pass to server
+					/*
+					data : {
+						debug : CB.DebugMode.api,
+						session_id : user.sessionId,
+						user_key : user.user_key
+					},*/
+					url : api.value,
+					onerror : function(d) {
+						CB.Debug.dump(d, 232, 'base/common.js');
+						//CB.Platform.actInd.hide();
+						CB.Util.alert(CB.Util.L('unknowError'),CB.Util.L('error'));
+					},
+					callback : function(d) {		
+						//the return data format should be match with the api name, like follow:
+						/*
+						   {
+							  "api_name": {
+							    "request_details": {
+							      "debug": "x",
+							      "session_id": "x",
+							      "user_key": "x",
+							    },
+							    "response_details": {
+							      "status": "x",
+							    }
+							  }
+							}
+						 */
+						var result = d[api.name].response_details;
+						CB.Debug.dump(d, 200, 'base/common.js');	
+						if(result.status == '0' && api.saveData){			
+							//CB.Util.removeObject(api.name);						
+					 		CB.Util.saveObject(api.name, result);
+					 	}
+						
+						//CB.Platform.actInd.hide();
+						
+						callback(result);
+						
+						//reset the object when there is an error
+						/*
+						if (result.status == '1' || result.status == '2') {
+							CB.Util.removeObject('user');
+							if(api.saveData){	
+								CB.Util.removeObject(api.name);
+							}
+						}*/
+						
+						//common errors handler
+						CB.API.errorHandle(result.status);
 					}
 				}
+				if(requestData != undefined){
+					CB.Platform.extend(ajaxObj.data, requestData);
+				}
+	
+				CB.Debug.dump(ajaxObj,263, 'base/common.js');
+				
+				CB.Ajax.request(ajaxObj);
 			}
-			if (requestData != undefined) {
-				CB.Platform.extend(ajaxObj.data, requestData);
-			}
-			CB.Ajax.request(ajaxObj);
+		/*
 		} else {
 			CB.Util.removeObject('user');
-			if (saveData) {
-				CB.Util.removeObject(api);
+			if(api.saveData){
+				CB.Util.removeObject(api.name);
 			}
 			CB.Util.alert(CB.Util.L('timeout'), CB.Util.L('error'));
-			CB.Launch(null, null, 'right');
-		}
+			CB.Launch(CB.RootController, false, 'right');
+		}*/
 	},
 	/**
 	 * Common view header

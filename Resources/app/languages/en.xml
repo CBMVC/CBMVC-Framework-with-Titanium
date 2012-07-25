@@ -4,8 +4,14 @@
 	<string id="logo">Welcome to Coder Blog!</string>
 	<string id="switchLang">Switch to Chinese</string>
 	
-	<!-- error message -->
-	<string id="error">Error</string>
+	<!-- system message -->
+	<string id="yes">Yes</string>
+	<string id="no">No</string>
+	<string id="error">Error</string>	
+	<string id="alert">Alert</string>
+	<string id="confirm">Confirm</string>
+	<string id="areYouSure">Are You Sure?</string>
+	<string id="success">Success</string>
 	<string id="timeout">Session is timeout!</string>	
 	<string id="loginError">Please input user name and password!</string>
 	<string id="invalidUser">Invalid User</string>

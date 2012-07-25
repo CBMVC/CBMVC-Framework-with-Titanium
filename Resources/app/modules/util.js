@@ -38,8 +38,33 @@ function alert(message, title){
 	    //cancel: 1,
 	    //buttonNames: ['Confirm', 'Cancel', 'Help'],
 	    message: message,
-	    title: title == undefined ? 'Alert' : title
+	    title: title == undefined ? this.L('alert') : title
 	 }).show();
+}
+
+
+/**
+ * show the alert dialog box
+ * @param {String} message, alert message 
+ * @param {String} title, alert box title
+ * @param {Object} callback function after click yes
+ */
+function confirm(message, title, callback){
+	 var dialog = Ti.UI.createAlertDialog({	 	
+	    buttonNames: [this.L('yes'), this.L('no')],
+	    message: message,
+	    cancel: 1,
+	    title: title == undefined ? this.L('confirm') : title
+	 });
+	 
+	 dialog.addEventListener('click', function(e) {
+		 if (e.cancel === e.index || e.cancel === true) {
+		      return;
+		 }		 
+		 callback();
+	 });
+	 
+	 dialog.show();
 }
 
 /**

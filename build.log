@@ -1,36 +1,31 @@
 Logfile initialized
-[INFO] logfile = /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build.log
-[DEBUG] /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/android/builder.py simulator CoderBlog /Volumes/MacCodes/Code/Mobile/Android/android-sdk-macosx /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium com.cbmvc.app 9 HVGA 
+[INFO] logfile = D:\Project\GitHub\CBMVC-Framework-with-Titanium\build.log
+[DEBUG] C:\Users\winson\AppData\Roaming\Titanium\mobilesdk\win32\2.0.2.GA\android\builder.py simulator CoderBlog C:\Program Files (x86)\Android\android-sdk D:\Project\GitHub\CBMVC-Framework-with-Titanium com.cbmvc.app 6 HVGA
 [INFO] Building CoderBlog for Android ... one moment
 [INFO] Titanium SDK version: 2.0.2 (05/30/12 10:21 2ff31a3)
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 1 devices/emulators
-[TRACE] adb devices returned 1 devices/emulators
-[TRACE] adb devices returned 1 devices/emulators
-[TRACE] adb devices returned 1 devices/emulators
-[DEBUG] Device connected... (waited 15 seconds)
-[DEBUG] waited 15.104881 seconds on emulator to get ready
-[INFO] Waiting for the Android Emulator to become available
+[DEBUG] Device connected... (waited 0 seconds)
+[DEBUG] waited 0.016000 seconds on emulator to get ready
 [DEBUG] com.cbmvc.app installed? True
 [INFO] Fastdev server running, deploying in Fastdev mode
 [INFO] Copying CommonJS modules...
 [INFO] Copying project resources..
-[TRACE] COPYING MODIFIED FILE: /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/app/base/core.js => /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/android/bin/assets/Resources/app/base/core.js
+[TRACE] COPYING MODIFIED FILE: D:\Project\GitHub\CBMVC-Framework-with-Titanium\Resources\app\base\api.js => D:\Project\GitHub\CBMVC-Framework-with-Titanium\build\android\bin\assets\Resources\app\base\api.js
 [INFO] Tiapp.xml unchanged, skipping class generation
 [DEBUG] Processing Android resource drawables
-[DEBUG] found drawable-long-land-hdpi splash screen at /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/android/images/res-long-land-hdpi/default.png
-[DEBUG] found drawable-long-land-ldpi splash screen at /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/android/images/res-long-land-ldpi/default.png
-[DEBUG] found drawable-long-port-hdpi splash screen at /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/android/images/res-long-port-hdpi/default.png
-[DEBUG] found drawable-long-port-ldpi splash screen at /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/android/images/res-long-port-ldpi/default.png
-[DEBUG] found drawable-notlong-land-hdpi splash screen at /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/android/images/res-notlong-land-hdpi/default.png
-[DEBUG] found drawable-notlong-land-ldpi splash screen at /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/android/images/res-notlong-land-ldpi/default.png
-[DEBUG] found drawable-notlong-land-mdpi splash screen at /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/android/images/res-notlong-land-mdpi/default.png
-[DEBUG] found drawable-notlong-port-hdpi splash screen at /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/android/images/res-notlong-port-hdpi/default.png
-[DEBUG] found drawable-notlong-port-ldpi splash screen at /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/android/images/res-notlong-port-ldpi/default.png
-[DEBUG] found drawable-notlong-port-mdpi splash screen at /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/Resources/android/images/res-notlong-port-mdpi/default.png
+[DEBUG] found drawable-long-land-hdpi splash screen at D:\Project\GitHub\CBMVC-Framework-with-Titanium\Resources\android\images\res-long-land-hdpi\default.png
+[DEBUG] found drawable-long-land-ldpi splash screen at D:\Project\GitHub\CBMVC-Framework-with-Titanium\Resources\android\images\res-long-land-ldpi\default.png
+[DEBUG] found drawable-long-port-hdpi splash screen at D:\Project\GitHub\CBMVC-Framework-with-Titanium\Resources\android\images\res-long-port-hdpi\default.png
+[DEBUG] found drawable-long-port-ldpi splash screen at D:\Project\GitHub\CBMVC-Framework-with-Titanium\Resources\android\images\res-long-port-ldpi\default.png
+[DEBUG] found drawable-notlong-land-hdpi splash screen at D:\Project\GitHub\CBMVC-Framework-with-Titanium\Resources\android\images\res-notlong-land-hdpi\default.png
+[DEBUG] found drawable-notlong-land-ldpi splash screen at D:\Project\GitHub\CBMVC-Framework-with-Titanium\Resources\android\images\res-notlong-land-ldpi\default.png
+[DEBUG] found drawable-notlong-land-mdpi splash screen at D:\Project\GitHub\CBMVC-Framework-with-Titanium\Resources\android\images\res-notlong-land-mdpi\default.png
+[DEBUG] found drawable-notlong-port-hdpi splash screen at D:\Project\GitHub\CBMVC-Framework-with-Titanium\Resources\android\images\res-notlong-port-hdpi\default.png
+[DEBUG] found drawable-notlong-port-ldpi splash screen at D:\Project\GitHub\CBMVC-Framework-with-Titanium\Resources\android\images\res-notlong-port-ldpi\default.png
+[DEBUG] found drawable-notlong-port-mdpi splash screen at D:\Project\GitHub\CBMVC-Framework-with-Titanium\Resources\android\images\res-notlong-port-mdpi\default.png
 [INFO] Waiting for SDCard to become available..
 [INFO] Re-launching application ... CoderBlog
 [INFO] Launching application ... CoderBlog
-[TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.cbmvc.app/.CoderblogActivity }
+[TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.cbmvc.app/.CoderblogActivity }
 
-[INFO] Android Emulator has exited

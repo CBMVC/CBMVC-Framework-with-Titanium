@@ -4,7 +4,13 @@
 	<string id="logo">欢迎光临代码部落！</string>
 	<string id="switchLang">转为英文</string>
 
-	<!-- error message -->
+	<!-- system message -->
+	<string id="yes">是</string>
+	<string id="no">否</string>
+	<string id="alert">警告</string>
+	<string id="confirm">确认</string>
+	<string id="areYouSure">你确定吗?</string>
+	<string id="success">成功</string>
 	<string id="error">錯誤</string>
 	<string id="timeout">Session is timeout!</string>	
 	<string id="loginError">請輸入用戶名和密碼!</string>
