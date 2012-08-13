@@ -164,7 +164,7 @@ function L(key) {
 			title : 'Error: lang key ' + key,
 			message : 'Cannot found the language key!' + e
 		});
-		//dialog.show();
+		dialog.show();
 	}
 }
 

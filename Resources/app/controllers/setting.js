@@ -47,7 +47,7 @@ __exports.viewLoaded = function(e) {
 			first_name : 'ddd',
 			last_name : 'ccc'
 		}];
-		CB.DB.each(data, function(properties, key) {
+		CB.DB.instance.each(data, function(properties, key) {
 			CB.Models.human.newRecord(properties).save();
 		});
 
@@ -58,7 +58,7 @@ __exports.viewLoaded = function(e) {
 	this.view.contentView.editBtn.addEventListener('click', function() {
 		if (e.view.contentView.textCityId.value != '' && e.view.contentView.textFirstName.value != '') {
 
-			var result = new CB.DB.query().update('human').set({
+			var result = new CB.DB.instance.query().update('human').set({
 				first_name : e.view.contentView.textFirstName.value
 			}).where(' city_id = ?', e.view.contentView.textCityId.value).execute();
 
@@ -69,7 +69,7 @@ __exports.viewLoaded = function(e) {
 
 	this.view.contentView.delBtn.addEventListener('click', function() {
 		if (e.view.contentView.textCityId.value != '') {
-			var q = new CB.DB.query().destroy().from('human').
+			var q = new CB.DB.instance.query().destroy().from('human').
 			where(' city_id = ?', e.view.contentView.textCityId.value).execute();
 		}
 		e.showRecords();
@@ -119,6 +119,6 @@ __exports.showRecords = function() {
 		'   last_name:' + result[rs].last_name, 116, 'setting.js');
 	}
 
-	var q = new CB.DB.query().count().from('human').execute();
+	var q = new CB.DB.instance.query().count().from('human').execute();
 	CB.Debug.dump(q, 122, 'setting.js');
 }

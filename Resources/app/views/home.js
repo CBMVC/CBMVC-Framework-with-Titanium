@@ -28,12 +28,12 @@ __exports = (function() {
 	view.contentView.add(view.contentView.switchLangBtn);
 	
 
-	view.contentView.refreshBtn = Ti.UI.createButton({
-		bottom: '20%',
-		title : 'Refresh',
+	view.contentView.loadingBtn = Ti.UI.createButton({
+		bottom: '30%',
+		title : 'Loading Test',
 		color : '#000'
 	});
-	view.contentView.add(view.contentView.refreshBtn);
+	view.contentView.add(view.contentView.loadingBtn);
 
 	return view;
 })();

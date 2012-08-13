@@ -5,6 +5,7 @@
 	<string id="switchLang">Switch to Chinese</string>
 	
 	<!-- system message -->
+	<string id="loading">Loading...</string>
 	<string id="yes">Yes</string>
 	<string id="no">No</string>
 	<string id="error">Error</string>	

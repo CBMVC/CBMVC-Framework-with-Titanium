@@ -30,27 +30,28 @@ __exports.viewLoaded = function(e) {
 		}else{
 			CB.Util.switchLang('en');
 		}
+		CB.Platform.actInd.setMessage(CB.Util.L('loading'));
 		CB.Launch('home', true, 'down');
 	});
 	
-
-	
-	
-	this.view.john2 = CB.DB.models.get('human').newRecord({
+	this.view.john2 = CB.DB.instance.models.get('human').newRecord({
       first_name: 'John',
       last_name: 'Doe'
     });
     this.view.john2.save();
 
     // create an other "human" record (persisted)
-    this.view.sarah2 = CB.DB.models.get('human').newRecord({
+    this.view.sarah2 = CB.DB.instance.models.get('human').newRecord({
       first_name: 'Sarah',
       last_name: 'Sure'
     });
     this.view.sarah2.save();
 
-   this.view.contentView.refreshBtn.addEventListener('click', function() {
-		CB.Launch(null, null, 'up');
+   this.view.contentView.loadingBtn.addEventListener('click', function() {
+		CB.Platform.actInd.show();
+		setInterval(function() {
+			CB.Platform.actInd.hide();
+		}, 2000);
 	});
 	
 	

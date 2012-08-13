@@ -114,15 +114,16 @@ function addRefreshBtn(coreObj, view) {
 
 		if (view.topBar != undefined) {
 			view.topBar.addEventListener('click', function() {
-				coreObj.Launch([view.name], true, 'up');
+				coreObj.Launch(view.name, true, 'up');
 			});
 		} else {
 			view.refreshBtn = Ti.UI.createButton({
+				bottom: '5%',
 				title : 'Refresh',
 				color : '#000'
 			});
 			view.refreshBtn.addEventListener('click', function() {
-				coreObj.Launch([view.name], true, 'up');
+				coreObj.Launch(view.name, true, 'up');
 			});
 			view.add(view.refreshBtn);
 		}

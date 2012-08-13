@@ -8,6 +8,7 @@ The example project here shows you how to build navigate betweens pages (with an
 
 with this framework, please update your titanium sdk to 2.0.1 or above.
 
+
 ## Feature
 
 1. Use MVC + commonJS structure, and use a namespace for the structure, it can avoid the memeory leak.
@@ -19,6 +20,12 @@ with this framework, please update your titanium sdk to 2.0.1 or above.
 7. You can set the API address for Ajax call with CB.API namespace.
 8. It's integraed joli ORM library, it's a powerful ORM library with javascript, there is a set of convenient and flexible syntax.
 
+## version 1.5 changed:
+1. Enhanced core performance, load the controller and view only inneed(load it when CB.pushController())
+2. More stable with switch pages
+3. Rewrite the model operation, now just use CB.DB.instance for all database operation, can open and close db connection anytime what you want.
+4. Enhanced loading controller effect, just use CB.Platform.actInd.show() and CB.Platform.actInd.hide() for controller the actInd.
+5. Added CB.Common.createDatePicker, CB.Common.createPicker and CB.Common.createPopupWin within CB.Common namespace.
 
 ## Usage
 
@@ -42,8 +49,8 @@ In app.js, it should look like this:
 
 
 	//load the controllers, the main controller must be the last one
-	Var controllers = ['home','login','mainFrame'];
-	CB.Launch(controllers);
+	CB.LoadControllers = ['home','login','mainFrame'];
+	CB.Launch();
 
 
 3. How to write a controller:
@@ -351,40 +358,57 @@ I just introduce how to use joli within CBMVC:
 
 1. Setup your database's name in /Resources/app/base/core.js file:
 
-	Models : {
-		dbName : 'coderblog'
-	}
+	DBName : 'cbmvc',
 
-2. Create a model and map your database table:
+2. Create a model and map your database table within CB.DB.initModels in db.js :
 
-/Resources/app/base/models.js
+/Resources/app/base/db.js
 
-	CB.Models = (function() {
-  		var m = {};
-  		//create table sturcture
-		m.human = new CB.DB.model({
-		    table:    'human',
-		    columns:  {
-		      id:                 'INTEGER PRIMARY KEY AUTOINCREMENT',
-		      city_id:            'INTEGER',
-		      first_name:         'TEXT',
-		      last_name:          'TEXT'
-		    },
-		    //the method of table object
+	CB.DB.initModels = function() {
+		var m = {};
+
+		m.human = new CB.DB.instance.model({
+			table : 'human',
+			columns : {
+				id : 'INTEGER PRIMARY KEY AUTOINCREMENT',
+				city_id : 'INTEGER',
+				first_name : 'TEXT',
+				last_name : 'TEXT'
+			},
 			methods : {
-					getByFirstName : function(firstName) {
-						// get by firstName
-						var result = CB.DB.models.get('human').findOneBy('first_name', firstName);
-		
-						if (!result) {
-							throw 'Could not find a firstName  with the  ' + firstName + '!';
-						} else {
-							return result;
-						}
+				getByFirstName : function(firstName) {
+					// get by firstName
+					var result = CB.DB.instance.models.get('human').findOneBy('first_name', firstName);
+
+					if (!result) {
+						throw 'Could not find a firstName  with the  ' + firstName + '!';
+					} else {
+						return result;
 					}
 				}
-		  });
-	});
+			}
+		});
+
+		m.city = new CB.DB.instance.model({
+			table : 'city',
+			columns : {
+				id : 'INTEGER PRIMARY KEY AUTOINCREMENT',
+				country_id : 'INTEGER',
+				name : 'TEXT',
+				description : 'TEXT'
+			}
+		});
+
+		m.country = new CB.DB.instance.model({
+			table : 'country',
+			columns : {
+				id : 'INTEGER PRIMARY KEY AUTOINCREMENT',
+				name : 'TEXT'
+			}
+		});
+
+		return m;
+	}
 
 then you can use joli's syntax to operate the database:
 
@@ -392,12 +416,12 @@ then you can use joli's syntax to operate the database:
 	CB.Models.human.newRecord(properties).save();
 	
 	//edit record
-	var result = new CB.DB.query().update('human').set({
+	var result = new CB.DB.instance.query().update('human').set({
 		 first_name : e.view.textFirstName.value
 	}).where(' city_id = ?', e.view.textCityId.value).execute();
 	
 	//delete record
-	var q = new CB.DB.query().destroy().from('human').
+	var q = new CB.DB.instance.query().destroy().from('human').
 			where(' city_id = ?', e.view.textCityId.value).execute();
 	
 	//query record

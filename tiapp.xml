@@ -13,7 +13,7 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>2.0.2.GA</sdk-version>
+    <sdk-version>2.1.1.GA</sdk-version>
     <id>com.cbmvc.app</id>
     <name>CoderBlog</name>
     <version>1.0</version>
@@ -56,7 +56,5 @@
         </splash>
         <theme>default</theme>
     </mobileweb>
-    <modules>
-        <module platform="commonjs" version="2.0.5">ti.cloud</module>
-    </modules>
+    <modules/>
 </ti:app>

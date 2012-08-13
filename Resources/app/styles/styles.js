@@ -35,6 +35,7 @@ CB.Styles = {
 			return '2%';
 		}
 	},
+	menuLeft : CB.screenWidth * 0.07,
 
 	/**
 	 * just for debug model, add the border to the view or button
@@ -92,7 +93,7 @@ CB.Styles = {
 		},
 		mainMenu : {
 			title:'Menu',
-		    left: CB.menuLeft,
+		    left: CB.Styles.menuLeft,
 		    top: 0,
 		    width: CB.screenWidth,
 		    height: CB.screenHeight,

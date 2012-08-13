@@ -15,7 +15,6 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 CB.Platform = {
 	android : {
 		menu : {}
@@ -34,7 +33,7 @@ CB.Platform = {
 
 	CB.Platform.extend = function(obj) {
 		var args = Array.prototype.slice.call(arguments, 1);
-		for (var i = 0; i < args.length; i++) {
+		for (var i = 0, l = args.length; i < l; i++) {
 			var source = args[i];
 			for (var prop in source) {
 				if (source[prop] !==
@@ -50,6 +49,10 @@ CB.Platform = {
 			CB.Platform.__isLargeScreen = (Ti.Platform.displayCaps.platformWidth >= 600);
 		}
 		return CB.Platform.__isLargeScreen;
+	};
+
+	CB.Platform.isHighDensity = function() {
+		return Ti.Platform.displayCaps.density == 'high';
 	};
 
 	CB.Platform.isAndroid = function() {
@@ -90,35 +93,89 @@ CB.Platform = {
 		}
 		return '';
 	};
-	
+
 	/**
 	 * Show the activity indicator with cross platform
 	 */
 	CB.Platform.actInd = {
+		actIndWin : undefined,
 		init : function(win) {
-			actInd = Titanium.UI.createActivityIndicator({
-				height : 'auto',
-				width : 'auto',
-				top : '50%',
-				left : '50%',
+
+			win.actInd = Titanium.UI.createActivityIndicator({
+				height : '100%',
+				width : '100%',
 				zIndex : 100,
 				//font : {fontFamily:'Helvetica Neue', fontSize:15,fontWeight:'bold'}
 			});
 
+			win.actInd.hide();
+
 			if (CB.Platform.isAndroid()) {
-				actInd.message = 'LOADING...';
+				win.actInd.message = CB.Util.L('loading');
+				win.add(win.actInd);
 			} else {
-				actInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.DARK;
+				win.actInd.top = '-15%';
+				
+				win.actIndContainer = Ti.UI.createView({
+					height : '100%',
+					width : '100%',
+				});
+				win.add(win.actIndContainer);
+
+				win.actIndContainer.mainBg = Ti.UI.createView({
+					height : '100%',
+					width : '100%',
+					backgroundColor : '#333',
+					opacity : 0.8
+				});
+				win.actIndContainer.add(win.actIndContainer.mainBg);
+
+				win.actIndContainer.actIndBg = Ti.UI.createView({
+					backgroundColor : '#000',
+					center : {
+						x : Ti.Platform.displayCaps.platformWidth / 2,
+						y : Ti.Platform.displayCaps.platformHeight / 2
+					},
+					width : 150,
+					height : 100,
+					borderRadius : 10
+				});
+				win.actIndContainer.add(win.actIndContainer.actIndBg);
+
+				win.actIndContainer.actIndBg.loading = Ti.UI.createLabel({
+					text : CB.Util.L('loading'),
+					color : '#fff',
+					left : '30%',
+					bottom : '25%'
+				});
+				win.actIndContainer.actIndBg.add(win.actIndContainer.actIndBg.loading);
+				
+				win.actIndContainer.hide();
+			
+				win.actIndContainer.actIndBg.add(win.actInd);
+				win.style = Titanium.UI.iPhone.ActivityIndicatorStyle.DARK;
 			}
 
-			actInd.hide();
-			win.add(actInd);
+			CB.Platform.actInd.actIndWin = win;
+		},
+		setMessage : function(message){
+			if(!CB.Platform.isAndroid()){
+				CB.Platform.actInd.actIndWin.actIndContainer.actIndBg.loading.text = message;
+			}else{
+				CB.Platform.actInd.actIndWin.actInd.message = message;
+			}
 		},
 		show : function() {
-			actInd.show();
+			CB.Platform.actInd.actIndWin.actInd.show();
+			if (!CB.Platform.isAndroid()) {
+				CB.Platform.actInd.actIndWin.actIndContainer.show();
+			}
 		},
 		hide : function() {
-			actInd.hide();
+			CB.Platform.actInd.actIndWin.actInd.hide();
+			if (!CB.Platform.isAndroid()) {
+				CB.Platform.actInd.actIndWin.actIndContainer.hide();
+			}
 		}
 	};
 
@@ -139,3 +196,4 @@ CB.Platform = {
 	};
 
 })();
+
