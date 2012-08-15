@@ -467,7 +467,7 @@ Ti.include('/app/base/lib.js');
 				}
 				controller.base.viewDidAppear(controller);
 
-				alert('current pages:' + CB.mainView.children.length);
+				//alert('current pages:' + CB.mainView.children.length);
 			});
 		});
 
@@ -484,21 +484,6 @@ Ti.include('/app/base/lib.js');
 		var previous = CB.stackOfControllers[CB.stackOfControllers.length - 2];
 		CB.stackOfControllers.pop();
 
-		CB.mainView.layouting(function() {
-			CB.mainView.width = CB.screenWidth * 2;
-			CB.mainView.left = -CB.screenWidth;
-			top.view.left = CB.screenWidth;
-
-			if (previous !== null) {
-				previous.view.left = 0;
-				previous.view.top = 0;
-
-				previous.base.viewWillAppear(previous);
-			}
-
-			top.base.viewWillDisappear(top);
-
-		});
 
 		if (animate && animate == 'none') {
 			CB.mainView.layouting(function() {
@@ -614,7 +599,7 @@ Ti.include('/app/base/lib.js');
 		this.base.viewWillAppear = function(e) {
 			//add a refresh button for testing layout, just for debug mode
 			if (CB.DebugMode.sys.mode != 0) {
-				CB.Debug.addRefreshBtn(CB, e.view);
+			//	CB.Debug.addRefreshBtn(CB, e.view);
 			}
 
 			if (self.viewWillAppear !== undefined) {
