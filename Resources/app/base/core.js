@@ -21,7 +21,7 @@
  * all objects and method should be under this namespace
  */
 var CB = {
-	__changeControllerDuration : 250,
+	changeControllerDuration : 250,
 	LoadControllers : undefined, //what the controllers should be loaded.
 	/**
 	 * The framework's version

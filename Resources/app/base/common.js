@@ -729,7 +729,7 @@ CB.Common = {
 		mainView.mainMenu.menuBtn.backgroundImage = CB.Styles.imagePath + 'menu-btn-right.png';
 
 		mainView.animate({
-			duration : CB.__changeControllerDuration,
+			duration : CB.changeControllerDuration,
 			left : -CB.screenWidth,
 			top : 0
 		}, function() {
@@ -744,7 +744,7 @@ CB.Common = {
 		mainView.mainMenu.menuBtn.backgroundImage = CB.Styles.imagePath + 'menu-btn-left.png';
 
 		mainView.animate({
-			duration : CB.__changeControllerDuration,
+			duration : CB.changeControllerDuration,
 			left : -CB.screenWidth + (CB.screenWidth * 0.13),
 			top : 0
 		}, function() {
