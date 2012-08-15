@@ -34,6 +34,13 @@ __exports = (function() {
 		color : '#000'
 	});
 	view.contentView.add(view.contentView.loadingBtn);
+	
+	view.contentView.popupBtn = Ti.UI.createButton({
+		bottom: '55%',
+		title : 'Test Popup Window',
+		color : '#000'
+	});
+	view.contentView.add(view.contentView.popupBtn);
 
 	return view;
 })();

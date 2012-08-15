@@ -54,7 +54,24 @@ __exports.viewLoaded = function(e) {
 		}, 2000);
 	});
 	
-	
+	this.view.contentView.popupBtn.addEventListener('click', function() {
+		e.view.popWin = null;
+
+			CB.Common.UI.createPopupWin(e.view);
+			var popView = e.view.popWin.popView;
+
+			popView.content = Ti.UI.createWebView(CB.Styles.common.webview);
+			popView.content.html = '<h1>Test...</h1><p>This is a popup window of CBMVC demo!</p>';
+			popView.add(popView.content);
+
+			popView.okBtn = Ti.UI.createButton(CB.Styles.common.okBtn);
+			popView.add(popView.okBtn);
+
+			popView.okBtn.addEventListener('click', function(ce) {
+				CB.Common.UI.closePopupWin(e.view);
+				
+			});
+	});
    
 };
 

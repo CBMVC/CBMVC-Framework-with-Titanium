@@ -73,6 +73,28 @@ CB.Styles = {
 				fontSize : '14dp',
 				fontWeight : 'bold'
 			}
+		},
+		popCloseBtn : {
+			//left : '4%',
+			//top : '4%',
+			width : '9%',
+			height : '6.4%',
+			backgroundImage : CB.Styles.imagePath + 'btn-close.png'
+		},
+		webview : {
+			top : CB.screenHeight * 0.03,
+			left: CB.screenHeight * 0.03,
+			width : '90%',
+			height : '85%',
+			borderColor: '#fff',
+			//backgroundColor:'blue'
+		},
+		okBtn : {
+			left : '40%',
+			width : '18%',
+			bottom: '2%',
+			title: 'OK',
+			height : CB.screenHeight * 0.06
 		}
 	}
 	/**

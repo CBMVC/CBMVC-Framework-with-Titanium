@@ -599,7 +599,7 @@ Ti.include('/app/base/lib.js');
 		this.base.viewWillAppear = function(e) {
 			//add a refresh button for testing layout, just for debug mode
 			if (CB.DebugMode.sys.mode != 0) {
-			//	CB.Debug.addRefreshBtn(CB, e.view);
+				CB.Debug.addRefreshBtn(CB, e.view);
 			}
 
 			if (self.viewWillAppear !== undefined) {
