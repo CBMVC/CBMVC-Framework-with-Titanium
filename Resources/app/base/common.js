@@ -446,8 +446,6 @@ CB.Common = {
 		/**
 		 * Create and show a popup modal window
 		 * @param {Object} view, the view with popup window parameter and elements
-		 * must be create the popWin property within the view
-		 *  view.popWin = null
 		 * @param {int} winHeight, height of the popup window, null for full screen
 		 * @param {int} winWidth, width of the popup window, null for full screen
 		 */

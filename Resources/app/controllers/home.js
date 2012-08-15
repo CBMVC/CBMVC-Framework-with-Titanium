@@ -54,8 +54,7 @@ __exports.viewLoaded = function(e) {
 	});
 
 	this.view.contentView.popupBtn.addEventListener('click', function() {
-		e.view.popWin = null;
-
+		
 		CB.Common.UI.createPopupWin(e.view);
 		var popView = e.view.popWin.popView;
 
