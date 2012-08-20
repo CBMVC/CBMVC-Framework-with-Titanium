@@ -132,11 +132,11 @@ CB.Common = {
 
 			mainView.mainFrame.mainMenu.mainMenuBar.homeBtn.addEventListener('click', function() {
 				//CB.controllers.mainFrame.toggleMenu();
-				CB.Launch(null, null, 'left');
+				CB.Launch('home', false, 'none');
 			});
 
 			mainView.mainFrame.mainMenu.mainMenuBar.settingBtn.addEventListener('click', function() {
-				CB.pushController(CB.controllers.setting);
+				CB.pushController(CB.controllers.setting,'none');
 			});
 
 			//this.setCurrMenu(mainView);

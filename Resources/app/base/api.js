@@ -27,15 +27,15 @@ CB.API = {
 	errorHandle : function(status){
 		switch (status) {
 			case '1':
-				CB.Util.alert(AvantBiz.Util.L('invalidSession'), AvantBiz.Util.L('error'));
-				AvantBiz.Launch(AvantBiz.RootController, false, 'right');
+				CB.Util.alert(CB.Util.L('invalidSession'), CB.Util.L('error'));
+				CB.Launch(CB.RootController, false, 'right');
 				break;
 			case '2':
-				AvantBiz.Util.alert(AvantBiz.Util.L('timeout'), AvantBiz.Util.L('error'));
-				AvantBiz.Launch(AvantBiz.RootController, false, 'right');
+				CB.Util.alert(CB.Util.L('timeout'), CB.Util.L('error'));
+				CB.Launch(CB.RootController, false, 'right');
 				break;
 			/*case '3':
-				AvantBiz.Util.alert(AvantBiz.Util.L('invalidInput'), AvantBiz.Util.L('error'));
+				CB.Util.alert(CB.Util.L('invalidInput'), CB.Util.L('error'));
 				break;*/							
 		} 
 	},

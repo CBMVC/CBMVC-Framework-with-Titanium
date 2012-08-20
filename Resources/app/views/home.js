@@ -17,10 +17,16 @@
 
 __exports = (function() {
 
-	var view  = CB.Common.UI.createBaseViewWithMenu(__exports.viewName);
-
+	//var view  = CB.Common.UI.createBaseViewWithMenu(__exports.viewName);
+	var view = Ti.UI.createView(CB.Styles.common.baseView);	
+	view.name = __exports.viewName;
+	view.contentView = Ti.UI.createView();
+	view.add(view.contentView);
 	view.contentView.add(Ti.UI.createLabel(CB.Styles[view.name].logo));	
-	
+	/*
+	view.contentView.backBtn = Ti.UI.createButton(CB.Styles[view.name].backBtn);
+	view.contentView.add(view.contentView.backBtn);
+	*/
 	view.contentView.goBtn = Ti.UI.createButton(CB.Styles[view.name].goBtn);
 	view.contentView.add(view.contentView.goBtn);
 	

@@ -3,6 +3,8 @@
 	<!-- general message -->
 	<string id="logo">Welcome to Coder Blog!</string>
 	<string id="switchLang">Switch to Chinese</string>
+	<string id="coderblog">Coder Blog</string>
+	<string id="search">Search</string>
 	
 	<!-- system message -->
 	<string id="loading">Loading...</string>

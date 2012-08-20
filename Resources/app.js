@@ -62,10 +62,9 @@ CB.DebugMode = {
 }
 
 //load the controllers, the main controller must be the last one
-CB.LoadControllers= ['home','setting'];
+CB.LoadControllers= ['simpleView','home','setting'];
 
-CB.RootController = 'home';
 
 //launch the app
-CB.Launch();
-
+CB.Launch('home',false,'none');
+CB.openWindow();

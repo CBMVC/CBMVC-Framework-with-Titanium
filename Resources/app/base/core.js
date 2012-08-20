@@ -1,18 +1,18 @@
 /**
  * @file overview This file contains the core framework class CBMVC.
- * @version: 1.5
+ * @version: 1.5.1
  * @author Winson  winsonet@gmail.com
  * @copyright Winson http://www.coderblog.in
  * @license MIT License http://www.opensource.org/licenses/mit-license.php
- * 
- * @disclaimer THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
- * IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * 	PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
+ *
+ * @disclaimer THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ * IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * 	PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
@@ -21,29 +21,30 @@
  * all objects and method should be under this namespace
  */
 var CB = {
-	changeControllerDuration : 250,
-	LoadControllers : undefined, //what the controllers should be loaded.
-	/**
-	 * The framework's version
-	 */
-	Version: '1.5',
-	/**
-	 * the root controller, can be set in app.js
-	 */
-	RootController : 'home',
+	changeControllerDuration : (Ti.Platform.osname == 'android') ? 500 : 300,
+	LoadControllers : undefined, //the controllers should be loaded.
 
 	/**
 	 * The app's name
 	 */
 	AppName : 'CBMVC',
 	/**
+	 *  Database 's name
+	 */
+	DBName : 'cbmvc',
+	/**
+	 * the root controller, can be set in app.js
+	 */
+	RootController : 'home',
+
+	/**
 	 * Launch the app, or only refresh a page
-	 * @param {String} controllers, should be a string and split with a comma, etc. 'home','login'
+	 * @param {String} controller, should be a string with a controller name, etc. 'home','login'
 	 * @param {Boolen} isRefreshSinglePage, true for just refresh a page, false for reload all pages
 	 * @param {String} animate
 	 */
 	Launch : function(controller, isRefreshSinglePage, animate) {
-
+		CB.Platform.actInd.show();
 		//set default language
 		CB.Util.setDefaultLang(CB.DefaultLang);
 
@@ -59,14 +60,15 @@ var CB = {
 			var currController = CB.stackOfControllers[CB.stackOfControllers.length - 1];
 			if (controller !== CB.RootController && currController != undefined) {
 				//CB.mainView.remove(currController.view);
-				CB.stackOfControllers[currController] = null;
-				CB.stackOfControllers.pop();
-				CB.controllers[controller] = null;
 				currController = null;
 			}
-			
-			CB.controllers[controller] = {name: controller};
+			CB.stackOfControllers[CB.controllers[controller]] = null;
+			CB.stackOfControllers.pop();
+			CB.controllers[controller] = {
+				name : controller
+			};
 			CB.loadStyle();
+
 			//controllers = [controller];
 			//CB.includeControllers(controllers);
 			CB.pushController(CB.controllers[controller], animate);
@@ -80,21 +82,32 @@ var CB = {
 
 			CB.controllers = [];
 			CB.includeControllers(CB.LoadControllers);
-			CB.pushController(CB.controllers[controller], animate);
+			CB.pushController(CB.controllers[controller], animate, true);
 
 		}
 
 		//just load at first time
-		if (arguments.length == 0) {
-			CB.openWindow();
-		}
+		//if (arguments.length == 0) {
+		//	CB.openWindow();
+		//}
 	},
-
 
 	/**
 	 * Set the default language
 	 */
 	DefaultLang : 'en',
+	/**
+	 * Get and Set the current language
+	 */
+	CurrentLang : 'en',
+	/**
+	 * All support languages
+	 */
+	SupportLanguages : {
+		'en' : 'btn-en-lang.png',
+		'zf' : 'btn-ch-lang.png',
+		'pt' : 'btn-po-lang.png'
+	},
 	/**
 	 * Debug mode setting
 	 */
@@ -140,10 +153,6 @@ var CB = {
 	 * Styles of each view
 	 */
 	Styles : {},
-	/**
-	 *  Database 's name
-	 */
-	DBName : 'cbmvc',
 	/**
 	 * Data model
 	 */
@@ -278,14 +287,14 @@ Ti.include('/app/base/lib.js');
 		CB.Platform.actInd.show();
 
 		//reload all pages and return home page
-		 for (var i = 0, l = CB.stackOfControllers.length; i < l; i++) {
-			 if (CB.stackOfControllers[i] != undefined) {
-				 CB.mainView.remove(CB.stackOfControllers[i].view);
-				 CB.stackOfControllers.splice(i, 1);
-				 CB.stackOfControllers[i] = null;
-				 CB.stackOfControllers.pop();
-			 }
-		 }
+		for (var i = 0, l = CB.stackOfControllers.length; i < l; i++) {
+			if (CB.stackOfControllers[i] != undefined) {
+				CB.mainView.remove(CB.stackOfControllers[i].view);
+				CB.stackOfControllers.splice(i, 1);
+				CB.stackOfControllers[i] = null;
+				CB.stackOfControllers.pop();
+			}
+		}
 		CB.stackOfControllers = [];
 		CB.controllers = [];
 
@@ -314,8 +323,8 @@ Ti.include('/app/base/lib.js');
 	 * 	up: for move to up animation, default move to left
 	 * 	down: for move to down animation, default move to left
 	 */
-	CB.pushController = function(/*Controller*/controller, animate) {
-
+	CB.pushController = function(/*Controller*/controller, animate, isLaunch) {
+		CB.Platform.actInd.show();
 		var previous = (CB.stackOfControllers.length == 0) ? null : CB.stackOfControllers[CB.stackOfControllers.length - 1];
 
 		/*
@@ -328,10 +337,18 @@ Ti.include('/app/base/lib.js');
 		var animationTop = 0;
 		var animationLeft = CB.mainView.left - CB.screenWidth;
 
+		//reset the mainView at first
+		CB.mainView.left = 0;
+		CB.mainView.top = 0;
+		CB.mainView.width = CB.screenWidth;
+		CB.mainView.height = CB.screenHeight;
+
 		//load the controller runtime
 		if (!controller.view) {
 			controller = CB.loadController(controller);
 		}
+		controller.view.left = 0;
+		controller.view.top = 0;
 
 		if (CB.Plugins._.include(CB.stackOfControllers, controller)) {
 			var aIndex = CB.Plugins._.indexOf(CB.stackOfControllers, controller);
@@ -339,37 +356,39 @@ Ti.include('/app/base/lib.js');
 		}
 
 		CB.stackOfControllers.push(controller);
-		controller.view.top = 0;
+
 
 		//remove the duplicate view at first
-		
-		var duplicateView = null;
-		if (CB.mainView.children) {
-			for (var viewIndex = 0, l = CB.mainView.children.length; viewIndex < l; viewIndex++) {
-				if (CB.mainView.children[viewIndex].name == controller.view.name) {
-					duplicateView = CB.mainView.children[viewIndex];
-					break;
-				}
-			}
-		}
+		/*
+		 var duplicateView = null;
+		 if (CB.mainView.children) {
+		 for (var viewIndex = 0, l = CB.mainView.children.length; viewIndex < l; viewIndex++) {
+		 if (CB.mainView.children[viewIndex].name == controller.view.name) {
+		 duplicateView = CB.mainView.children[viewIndex];
+		 break;
+		 }
+		 }
+		 }*/
 
 		if (animate === 'none') {
 			CB.mainView.layouting(function() {
-				controller.base.viewWillAppear(controller);
-				controller.view.left = 0;
 
-				if (duplicateView) {
-					CB.mainView.remove(duplicateView);
-				}
+				controller.base.viewWillAppear(controller);
+				//controller.view.left = 0;
+				//CB.mainView.left = 100;
+				//CB.mainView.backgroundColor = 'blue';
 				CB.mainView.add(controller.view);
 
 				if (previous !== null) {
-					//CB.mainView.remove(previous.view);
 					previous.base.viewWillDisappear(previous);
+					CB.mainView.remove(previous.view);
 				}
 				controller.base.viewDidAppear(controller);
 			});
-			//alert('after non :' + CB.mainView.children.length );
+			CB.Debug.echo('CB.mainView left:'+CB.mainView.left  + '  CB.mainView.width:'+CB.mainView.width, 399, 'core');
+			CB.Debug.echo('controller left:'+controller.view.left  + '  controller .width:'+controller.view.width, 400, 'core');
+			CB.Platform.actInd.hide();
+			//alert('after non :' + CB.mainView.children.length);
 			return;
 		} else if (animate === 'right') {
 			CB.mainView.layouting(function() {
@@ -379,9 +398,9 @@ Ti.include('/app/base/lib.js');
 				controller.view.left = 0;
 				controller.view.top = 0;
 
-				if (duplicateView) {
-					CB.mainView.remove(duplicateView);
-				}
+				/*if (duplicateView) {
+				 CB.mainView.remove(duplicateView);
+				 }*/
 				CB.mainView.add(controller.view);
 
 				if (previous !== null) {
@@ -398,9 +417,9 @@ Ti.include('/app/base/lib.js');
 
 				controller.view.left = 0;
 
-				if (duplicateView) {
-					CB.mainView.remove(duplicateView);
-				}
+				/*if (duplicateView) {
+				 CB.mainView.remove(duplicateView);
+				 }*/
 				CB.mainView.add(controller.view);
 
 				if (previous !== null) {
@@ -418,9 +437,9 @@ Ti.include('/app/base/lib.js');
 
 				controller.view.left = 0;
 
-				if (duplicateView) {
-					CB.mainView.remove(duplicateView);
-				}
+				/*if (duplicateView) {
+				 CB.mainView.remove(duplicateView);
+				 }*/
 				CB.mainView.add(controller.view);
 
 				if (previous !== null) {
@@ -435,9 +454,6 @@ Ti.include('/app/base/lib.js');
 				CB.mainView.width = CB.screenWidth * 2;
 				controller.view.left = CB.screenWidth;
 
-				if (duplicateView) {
-					CB.mainView.remove(duplicateView);
-				}
 				CB.mainView.add(controller.view);
 
 				if (previous !== null) {
@@ -447,27 +463,46 @@ Ti.include('/app/base/lib.js');
 			});
 		}
 
+		/*
+		 CB.mainView.layouting(function() {
+		 //CB.mainView.left = 0;
+		 CB.mainView.top = 0;
+		 //CB.mainView.width = CB.screenWidth;
+		 CB.mainView.height = CB.screenHeight;
+
+		 controller.view.left = 0;
+		 controller.view.top = 0;
+
+		 if (previous !== null) {
+		 previous.base.viewWillDisappear(previous);
+		 CB.mainView.remove(previous.view);
+		 }
+		 controller.base.viewDidAppear(controller);
+		 CB.Platform.actInd.hide();
+		 //alert('push:' + CB.mainView.children.length);
+		 });
+		 */
+
 		CB.mainView.animate({
 			duration : CB.changeControllerDuration,
 			left : animationLeft,
 			top : animationTop,
 		}, function() {
 			CB.mainView.layouting(function() {
+				/*
 				CB.mainView.left = 0;
 				CB.mainView.top = 0;
 				CB.mainView.width = CB.screenWidth;
 				CB.mainView.height = CB.screenHeight;
-
-				controller.view.left = 0;
-				controller.view.top = 0;
+				*/
 
 				if (previous !== null) {
-					//CB.mainView.remove(previous.view);
 					previous.base.viewWillDisappear(previous);
+					CB.mainView.remove(previous.view);
 				}
 				controller.base.viewDidAppear(controller);
-
-				//alert('current pages:' + CB.mainView.children.length);
+				CB.Platform.actInd.hide();
+				//alert('push:' + CB.mainView.children.length);
 			});
 		});
 
@@ -484,47 +519,42 @@ Ti.include('/app/base/lib.js');
 		var previous = CB.stackOfControllers[CB.stackOfControllers.length - 2];
 		CB.stackOfControllers.pop();
 
+		CB.mainView.layouting(function() {
+			CB.mainView.width = CB.screenWidth * 2;
+			CB.mainView.left = -CB.screenWidth;
+			top.view.left = CB.screenWidth;
 
-		if (animate && animate == 'none') {
+			if (previous !== null) {
+				previous.view.left = 0;
+				previous.view.top = 0;
+				CB.mainView.add(previous.view);
+				previous.base.viewWillAppear(previous);
+			}
+
+			top.base.viewWillDisappear(top);
+
+		});
+
+		CB.mainView.animate({
+			duration : CB.changeControllerDuration,
+			left : CB.mainView.left + CB.screenWidth,
+			top : 0
+		}, function() {
 			CB.mainView.layouting(function() {
-				//CB.mainWindow.remove(CB.mainOverlay);
 
-				CB.mainView.remove(top.view);
-
-				CB.mainView.left = 0;
-				CB.mainView.width = CB.screenWidth;
 				if (previous !== null) {
 					//CB.mainView.add(previous.view);
 					previous.view.top = 0;
 					previous.base.viewDidAppear(previous);
 				}
 
+				CB.mainView.left = 0;
+				CB.mainView.width = CB.screenWidth;
 				top.base.viewDidDisappear(top);
+				CB.mainView.remove(top.view);
+				//alert('pop:' + CB.mainView.children.length);
 			});
-		} else {
-			CB.mainView.animate({
-				duration : CB.changeControllerDuration,
-				left : CB.mainView.left + CB.screenWidth,
-				top : 0
-			}, function() {
-				CB.mainView.layouting(function() {
-
-					if (previous !== null) {
-						//CB.mainView.add(previous.view);
-						previous.view.top = 0;
-						previous.base.viewDidAppear(previous);
-					}
-
-					CB.mainView.remove(top.view);
-
-					CB.mainView.left = 0;
-					CB.mainView.width = CB.screenWidth;
-					top.base.viewDidDisappear(top);
-					//CB.controllers[top.name] = {name: top.name};
-					//alert('pop:' + CB.mainView.children.length);
-				});
-			});
-		}
+		});
 
 	}
 	/**
@@ -542,14 +572,23 @@ Ti.include('/app/base/lib.js');
 	};
 
 	CB.require = function(path, viewName) {
+		//for debug to test the run time
+		var startTime = 0;
+		var endTime = 0;
+		startTime = new Date().getTime();
+
 		__exports = {
 			viewName : viewName
 		};
 		Ti.include(path + '.js');
+		//for debug to test the run time
+		endTime = new Date().getTime();
+		CB.Debug.echo(viewName + ' run time:' + (endTime - startTime) / 1000 + 'sec');
+
 		return __exports;
 	};
-	
-	CB.loadStyle = function(){
+
+	CB.loadStyle = function() {
 		//reload the styles when refresh the page
 		CB.Styles = null;
 		var loadStyle = '/app/styles/styles.js';
@@ -562,7 +601,10 @@ Ti.include('/app/base/lib.js');
 	};
 
 	CB.includeControllers = function(names) {
+
+		//reload the styles when refresh the page
 		CB.loadStyle();
+
 		for (var i = 0; i < names.length; i++) {
 			var controllerName = names[i];
 			CB.controllers[controllerName] = {
@@ -581,8 +623,8 @@ Ti.include('/app/base/lib.js');
 		CB.controllers[controllerName].view.name = controller.name;
 
 		for (var data in tmpObj) {
-			CB.Debug.dump(data, 594, 'core.js');
-			CB.Debug.dump(tmpObj[data], 595, 'core.js');
+			//CB.Debug.dump(data, 594, 'core.js');
+			//CB.Debug.dump(tmpObj[data], 595, 'core.js');
 			CB.controllers[controllerName][data] = tmpObj[data];
 		}
 		return CB.controllers[controllerName];
@@ -599,7 +641,7 @@ Ti.include('/app/base/lib.js');
 		this.base.viewWillAppear = function(e) {
 			//add a refresh button for testing layout, just for debug mode
 			if (CB.DebugMode.sys.mode != 0) {
-				CB.Debug.addRefreshBtn(CB, e.view);
+				//CB.Debug.addRefreshBtn(CB, e.view);
 			}
 
 			if (self.viewWillAppear !== undefined) {

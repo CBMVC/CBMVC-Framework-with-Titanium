@@ -109,6 +109,7 @@ CB.Platform = {
 			});
 
 			win.actInd.hide();
+			win.actInd.isHide = true;
 
 			if (CB.Platform.isAndroid()) {
 				win.actInd.message = CB.Util.L('loading');
@@ -166,15 +167,21 @@ CB.Platform = {
 			}
 		},
 		show : function() {
-			CB.Platform.actInd.actIndWin.actInd.show();
-			if (!CB.Platform.isAndroid()) {
-				CB.Platform.actInd.actIndWin.actIndContainer.show();
+			if(CB.Platform.actInd.actIndWin && CB.Platform.actInd.actIndWin.actInd.isHide){
+				CB.Platform.actInd.actIndWin.actInd.isHide = false;
+				CB.Platform.actInd.actIndWin.actInd.show();
+				if (!CB.Platform.isAndroid()) {
+					CB.Platform.actInd.actIndWin.actIndContainer.show();
+				}
 			}
 		},
 		hide : function() {
-			CB.Platform.actInd.actIndWin.actInd.hide();
-			if (!CB.Platform.isAndroid()) {
-				CB.Platform.actInd.actIndWin.actIndContainer.hide();
+			if(CB.Platform.actInd.actIndWin && !CB.Platform.actInd.actIndWin.actInd.isHide){
+				CB.Platform.actInd.actIndWin.actInd.isHide = true;
+				CB.Platform.actInd.actIndWin.actInd.hide();
+				if (!CB.Platform.isAndroid()) {
+					CB.Platform.actInd.actIndWin.actIndContainer.hide();
+				}
 			}
 		}
 	};
@@ -196,4 +203,5 @@ CB.Platform = {
 	};
 
 })();
+
 

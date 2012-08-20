@@ -36,6 +36,14 @@ CB.Styles = {
 		}
 	},
 	menuLeft : CB.screenWidth * 0.07,
+	tableHeight : function() {
+		//CB.Debug.echo(Ti.Platform.displayCaps.platformHeight, 7, 'styles.js');
+		if (CB.Platform.isAndroid()) {
+			return '85%';
+		} else {
+			return '88%';
+		}
+	},
 
 	/**
 	 * just for debug model, add the border to the view or button
@@ -95,6 +103,82 @@ CB.Styles = {
 			bottom: '2%',
 			title: 'OK',
 			height : CB.screenHeight * 0.06
+		},
+		
+		arrowIcon : {
+			width : '2%',
+			right : '10%',
+			image : CB.Styles.imagePath+ 'arrow-btn.png'
+		},
+		rowText : {
+			left : '5%',
+			top: '10%',
+			width : 'auto',
+			color : '#000',
+			font : {
+				fontSize : '15dp',
+				fontWeight : 'bold'
+			}
+		},
+		rowSubText : {
+			left : '15%',
+			bottom: '2%',
+			width : 'auto',
+			color : '#817f7f',
+			font : {
+				fontSize : '11dp'
+			}
+		},
+		tableList : {
+			top : '8%',
+			height : CB.Styles.tableHeight()
+		},
+		rowView : {
+			hasDetail : true,
+			hasChild: true,
+			height : '60dp',
+			backgroundImage : CB.Styles.imagePath + 'row-bg.png'
+		},
+		detaiView : {
+			top : '11%',
+			width: '100%',
+			height : '70%'
+		}
+	}
+	
+	/**
+	 * search bar style
+	 */
+	CB.Styles.searchBar = {
+		mainBar : {
+			top: '0',
+			height:'7%',
+			backgroundImage: CB.Styles.imagePath + 'bar-top.png'
+		},
+		searchInput : {
+			top : '10%',
+			right : '20%',
+			width : '60%',
+			height : '99%',
+			font: {
+				fontSize:'13dp'
+			},
+			hintText:  CB.Util.L('search'),
+			backgroundImage: CB.Styles.imagePath + 'search_bg.png'
+		},
+		searchView:{
+			top : '10%',
+			right : '1%',
+			width : '45%',
+			height : '90%',
+			backgroundImage: CB.Styles.imagePath + 'search_view.png'
+		},
+		cancelBtn:{
+			top : '19%',
+			right : '5%',
+			width : '15%',
+			height : '60%',
+			backgroundImage: CB.Styles.imagePath + 'cancel.png'
 		}
 	}
 	/**

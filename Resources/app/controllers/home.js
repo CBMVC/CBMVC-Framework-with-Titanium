@@ -21,6 +21,10 @@ __exports.viewLoaded = function(e) {
 	this.view.contentView.goBtn.addEventListener('click', function() {
 		CB.pushController(CB.controllers.setting);
 	});
+	/*
+	this.view.contentView.backBtn.addEventListener('click', function() {
+		CB.popController();
+	});*/
 
 	this.view.contentView.switchLangBtn.addEventListener('click', function() {
 		var currLang = CB.Util.getCurrLang();
@@ -74,7 +78,7 @@ __exports.viewLoaded = function(e) {
 
 __exports.viewWillAppear = function(e) {
 	if (e != undefined) {
-		CB.Common.setCurrMenu(e.view.mainFrame, CB.Styles.menuSelectedTop.home);
-		CB.Common.closeMenu(e.view.mainFrame);
+		//CB.Common.setCurrMenu(e.view.mainFrame, CB.Styles.menuSelectedTop.home);
+		//CB.Common.closeMenu(e.view.mainFrame);
 	}
 };

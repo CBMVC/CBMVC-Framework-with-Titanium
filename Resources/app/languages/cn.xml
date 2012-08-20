@@ -3,6 +3,8 @@
 	<!-- general message -->
 	<string id="logo">欢迎光临代码部落！</string>
 	<string id="switchLang">转为英文</string>
+	<string id="coderblog">代码部落</string>
+	<string id="search">搜索</string>
 
 	<!-- system message -->
 	<string id="loading">加载中...</string>
