@@ -20,6 +20,10 @@ with this framework, please update your titanium sdk to 2.0.1 or above.
 7. You can set the API address for Ajax call with CB.API namespace.
 8. It's integraed joli ORM library, it's a powerful ORM library with javascript, there is a set of convenient and flexible syntax.
 
+## version 1.5.1 changed:
+1. Enhanced core performance, only keep a view and controller in each time
+2. Support Ti sdk 2.1.1 (for android) 
+
 ## version 1.5 changed:
 1. Enhanced core performance, load the controller and view only inneed(load it when CB.pushController())
 2. More stable with switch pages
@@ -31,7 +35,7 @@ with this framework, please update your titanium sdk to 2.0.1 or above.
 
 1. Life cycle:
 ------------------------------------------
-	Launch app ==>  home view ==>  viewLoaded ==> home controller ==> viewWillAppear ==> viewDidAppear  ==> viewWillDisappear ==>  viewDidDisappear  
+	Launch app ==>  home controller ==>  viewLoaded ==>  home view ==> viewWillAppear ==> viewDidAppear  ==> viewWillDisappear ==>  viewDidDisappear  
 
 2. How to setup a controller:
 ------------------------------------------
