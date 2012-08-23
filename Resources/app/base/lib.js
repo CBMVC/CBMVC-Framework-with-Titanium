@@ -37,7 +37,10 @@ Ti.include(
 	'/app/base/mixin.js',
 	'/app/base/api.js',
 	'/app/base/db.js',
-	'/app/base/common.js'
+	'/app/base/common.js',
+	
+	'/app/languages/cn.js',
+	'/app/languages/en.js'
 );
 
 

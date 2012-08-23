@@ -47,6 +47,8 @@ var CB = {
 		CB.Platform.actInd.show();
 		//set default language
 		CB.Util.setDefaultLang(CB.DefaultLang);
+		
+		CB.Util.setCoreObj(CB);
 
 		CB.CurrentLang = CB.Util.getCurrLang();
 
@@ -101,12 +103,11 @@ var CB = {
 	 */
 	CurrentLang : 'en',
 	/**
-	 * All support languages
+	 * Languages
 	 */
-	SupportLanguages : {
-		'en' : 'btn-en-lang.png',
-		'zf' : 'btn-ch-lang.png',
-		'pt' : 'btn-po-lang.png'
+	Languages : {
+		cn :{},
+		en :{}
 	},
 	/**
 	 * Debug mode setting
@@ -278,41 +279,7 @@ Ti.include('/app/base/lib.js');
 		CB.mainWindow.open();
 	};
 
-	/**
-	 *  Batch push the controllers and reload all pages
-	 *  @param {Object} controllers, which controller need to be push
-	 *  @param {String} animate
-	 */
-	CB.batchPushControllers = function(controllers, animate) {
-		CB.Platform.actInd.show();
-
-		//reload all pages and return home page
-		for (var i = 0, l = CB.stackOfControllers.length; i < l; i++) {
-			if (CB.stackOfControllers[i] != undefined) {
-				CB.mainView.remove(CB.stackOfControllers[i].view);
-				CB.stackOfControllers.splice(i, 1);
-				CB.stackOfControllers[i] = null;
-				CB.stackOfControllers.pop();
-			}
-		}
-		CB.stackOfControllers = [];
-		CB.controllers = [];
-
-		CB.includeControllers(CB.LoadControllers);
-
-		for (var i = 0, l = controllers.length - 1; i < l; i++) {
-			//load the controller runtime
-			controllers[i] = CB.loadController(controllers[i]);
-			CB.stackOfControllers.push(controllers[i]);
-			//CB.mainView.remove(controllers[i].view);
-			controllers[i].view.top = -1000;
-			CB.mainView.add(controllers[i].view);
-			//controllers[i].view.top = 0;
-		}
-
-		CB.pushController(controllers[controllers.length - 1], animate)
-		CB.Platform.actInd.hide();
-	}
+	
 	/**
 	 * Push the controller to next screen
 	 * @param {String} controller, which controller need to show
@@ -324,7 +291,7 @@ Ti.include('/app/base/lib.js');
 	 * 	down: for move to down animation, default move to left
 	 */
 	CB.pushController = function(/*Controller*/controller, animate, isLaunch) {
-		CB.Platform.actInd.show();
+		//CB.Platform.actInd.show();
 		var previous = (CB.stackOfControllers.length == 0) ? null : CB.stackOfControllers[CB.stackOfControllers.length - 1];
 
 		/*
@@ -357,19 +324,6 @@ Ti.include('/app/base/lib.js');
 
 		CB.stackOfControllers.push(controller);
 
-
-		//remove the duplicate view at first
-		/*
-		 var duplicateView = null;
-		 if (CB.mainView.children) {
-		 for (var viewIndex = 0, l = CB.mainView.children.length; viewIndex < l; viewIndex++) {
-		 if (CB.mainView.children[viewIndex].name == controller.view.name) {
-		 duplicateView = CB.mainView.children[viewIndex];
-		 break;
-		 }
-		 }
-		 }*/
-
 		if (animate === 'none') {
 			CB.mainView.layouting(function() {
 
@@ -387,7 +341,7 @@ Ti.include('/app/base/lib.js');
 			});
 			CB.Debug.echo('CB.mainView left:'+CB.mainView.left  + '  CB.mainView.width:'+CB.mainView.width, 399, 'core');
 			CB.Debug.echo('controller left:'+controller.view.left  + '  controller .width:'+controller.view.width, 400, 'core');
-			CB.Platform.actInd.hide();
+			//CB.Platform.actInd.hide();
 			//alert('after non :' + CB.mainView.children.length);
 			return;
 		} else if (animate === 'right') {
@@ -463,25 +417,6 @@ Ti.include('/app/base/lib.js');
 			});
 		}
 
-		/*
-		 CB.mainView.layouting(function() {
-		 //CB.mainView.left = 0;
-		 CB.mainView.top = 0;
-		 //CB.mainView.width = CB.screenWidth;
-		 CB.mainView.height = CB.screenHeight;
-
-		 controller.view.left = 0;
-		 controller.view.top = 0;
-
-		 if (previous !== null) {
-		 previous.base.viewWillDisappear(previous);
-		 CB.mainView.remove(previous.view);
-		 }
-		 controller.base.viewDidAppear(controller);
-		 CB.Platform.actInd.hide();
-		 //alert('push:' + CB.mainView.children.length);
-		 });
-		 */
 
 		CB.mainView.animate({
 			duration : CB.changeControllerDuration,
@@ -501,7 +436,7 @@ Ti.include('/app/base/lib.js');
 					CB.mainView.remove(previous.view);
 				}
 				controller.base.viewDidAppear(controller);
-				CB.Platform.actInd.hide();
+				//CB.Platform.actInd.hide();
 				//alert('push:' + CB.mainView.children.length);
 			});
 		});

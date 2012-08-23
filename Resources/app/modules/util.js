@@ -20,11 +20,17 @@
  *
  */
 
+
 var __defaultLanguage = 'en';
+var __coreObj = undefined;
 
 function setDefaultLang(lang) {
 	if (lang != undefined)
 		this.__defaultLanguage = lang;
+}
+
+function setCoreObj(core) {
+	__coreObj = core;
 }
 
 /**
@@ -138,6 +144,20 @@ function switchLang(lang) {
  * get language by key
  */
 function L(key) {
+	var lang = this.loadObject('lang');
+	if (lang == null) {
+		lang = this.__defaultLanguage;
+		this.saveObject('lang', lang);
+	}
+	var text = __coreObj.Languages[lang][key];
+
+	if (text) {
+		return text;
+	}
+	return key;
+}
+
+function L_useless(key) {
 	try {
 		var lang = this.loadObject('lang');
 
@@ -182,6 +202,7 @@ function getCurrLang() {
 }
 
 exports.L = L;
+exports.setCoreObj = setCoreObj;
 exports.getCurrLang = getCurrLang;
 exports.setDefaultLang = setDefaultLang;
 exports.trim = trim;
