@@ -29,3 +29,4 @@ Logfile initialized
 [INFO] Launching application ... CoderBlog
 [TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.cbmvc.app/.CoderblogActivity }
 
+[INFO] Android Emulator has exited
