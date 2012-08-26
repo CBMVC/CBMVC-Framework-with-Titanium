@@ -311,6 +311,12 @@ CB.Styles = {
 			title : 'Edit Testing',
 			color : '#000'
 		},
+		pushToHomeBtn : {
+			top : '80%',
+			left : '7%',
+			title : 'Push to home',
+			color : '#000'
+		},
 		queryBtn : {
 			top : '40%',
 			left : '7%',

@@ -5,18 +5,18 @@ reporting an issue to help us understand your environment, build settings
 and aid in debugging. Please attach this log to any issue that you report.
 ================================================================================
 
-Starting build at 08/20/12 22:35
+Starting build at 08/26/12 17:17
 
 Build details:
 
-   timestamp=05/30/12 10:21
+   timestamp=07/27/12 14:01
    module_apiversion=2
-   version=2.0.2
-   githash=2ff31a3
+   version=2.1.1
+   githash=0fd84a2
 
 
 Script arguments:
-   /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/iphone/builder.py
+   /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/iphone/builder.py
    simulator
    5.0
    /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium
@@ -26,16 +26,16 @@ Script arguments:
    iphone
    
 
-Building from: /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.0.2.GA/iphone
+Building from: /Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/2.1.1.GA/iphone
 Platform: Darwin Kernel Version 11.4.0: Mon Apr  9 19:32:15 PDT 2012; root:xnu-1699.26.8~1/RELEASE_X86_64
 
 Xcode path is: /Developer
 
 
-githash=2ff31a3, existing_git_hash=2ff31a3
+githash=0fd84a2, existing_git_hash=0fd84a2
 writing contents of /Volumes/MacCodes/Code/Mobile/TitaniumProject/GitSource/CBMVC-Framework-with-Titanium/build/iphone/project.xcconfig:
 
-TI_VERSION=2.0.2.GA
+TI_VERSION=2.1.1.GA
 TI_SDK_DIR=/Users/winsonet/Library/Application Support/Titanium/mobilesdk/osx/$(TI_VERSION)/iphone
 TI_APPID=com.cbmvc.app
 OTHER_LDFLAGS[sdk=iphoneos*]=$(inherited) -weak_framework iAd

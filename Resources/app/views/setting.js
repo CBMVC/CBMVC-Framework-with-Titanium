@@ -41,7 +41,10 @@ __exports = (function() {
 	view.contentView.add(view.contentView.textFirstName);
 	
 	
-	view.add(Ti.UI.createLabel(CB.Styles[view.name].desc));	
+	view.add(Ti.UI.createLabel(CB.Styles[view.name].desc));
+	
+	view.contentView.pushToHomeBtn = Ti.UI.createButton(CB.Styles[view.name].pushToHomeBtn);
+	view.contentView.add(view.contentView.pushToHomeBtn);	
 
 	return view;
 })();

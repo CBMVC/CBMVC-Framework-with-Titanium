@@ -44,7 +44,7 @@ var CB = {
 	 * @param {String} animate
 	 */
 	Launch : function(controller, isRefreshSinglePage, animate) {
-		CB.Platform.actInd.show();
+		//CB.Platform.actInd.show();
 		//set default language
 		CB.Util.setDefaultLang(CB.DefaultLang);
 		
@@ -349,8 +349,8 @@ Ti.include('/app/base/lib.js');
 				CB.mainView.width = CB.screenWidth * 2;
 				CB.mainView.left = -CB.screenWidth;
 
-				controller.view.left = 0;
-				controller.view.top = 0;
+				//controller.view.left = 0;
+				//controller.view.top = 0;
 
 				/*if (duplicateView) {
 				 CB.mainView.remove(duplicateView);
@@ -369,7 +369,7 @@ Ti.include('/app/base/lib.js');
 				CB.mainView.height = CB.screenHeight * 2;
 				CB.mainView.top = -CB.screenHeight;
 
-				controller.view.left = 0;
+				//controller.view.left = 0;
 
 				/*if (duplicateView) {
 				 CB.mainView.remove(duplicateView);
@@ -389,7 +389,7 @@ Ti.include('/app/base/lib.js');
 				CB.mainView.height = CB.screenHeight * 2;
 				controller.view.top = CB.screenHeight;
 
-				controller.view.left = 0;
+				//controller.view.left = 0;
 
 				/*if (duplicateView) {
 				 CB.mainView.remove(duplicateView);
@@ -453,6 +453,9 @@ Ti.include('/app/base/lib.js');
 		var top = CB.stackOfControllers[CB.stackOfControllers.length - 1];
 		var previous = CB.stackOfControllers[CB.stackOfControllers.length - 2];
 		CB.stackOfControllers.pop();
+		
+		CB.mainView.left = 0;
+		CB.mainView.width = CB.screenWidth;
 
 		CB.mainView.layouting(function() {
 			CB.mainView.width = CB.screenWidth * 2;
@@ -483,8 +486,6 @@ Ti.include('/app/base/lib.js');
 					previous.base.viewDidAppear(previous);
 				}
 
-				CB.mainView.left = 0;
-				CB.mainView.width = CB.screenWidth;
 				top.base.viewDidDisappear(top);
 				CB.mainView.remove(top.view);
 				//alert('pop:' + CB.mainView.children.length);

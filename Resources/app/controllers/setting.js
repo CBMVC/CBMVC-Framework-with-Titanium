@@ -81,6 +81,10 @@ __exports.viewLoaded = function(e) {
 			CB.Debug.dump(mp, 80, 'setting.js');
 		}
 	});
+	
+	this.view.contentView.pushToHomeBtn.addEventListener('click', function() {
+		CB.pushController(CB.controllers.home,'right');
+	});
 
 	/*
 	 var tableData = [];
