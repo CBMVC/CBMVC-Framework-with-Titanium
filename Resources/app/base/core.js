@@ -454,8 +454,6 @@ Ti.include('/app/base/lib.js');
 		var previous = CB.stackOfControllers[CB.stackOfControllers.length - 2];
 		CB.stackOfControllers.pop();
 		
-		CB.mainView.left = 0;
-		CB.mainView.width = CB.screenWidth;
 
 		CB.mainView.layouting(function() {
 			CB.mainView.width = CB.screenWidth * 2;
@@ -485,6 +483,9 @@ Ti.include('/app/base/lib.js');
 					previous.view.top = 0;
 					previous.base.viewDidAppear(previous);
 				}
+				
+				CB.mainView.left = 0;
+				CB.mainView.width = CB.screenWidth;
 
 				top.base.viewDidDisappear(top);
 				CB.mainView.remove(top.view);
