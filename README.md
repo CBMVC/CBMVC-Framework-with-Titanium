@@ -20,6 +20,10 @@ with this framework, please update your titanium sdk to 2.0.1 or above.
 7. You can set the API address for Ajax call with CB.API namespace.
 8. It's integraed joli ORM library, it's a powerful ORM library with javascript, there is a set of convenient and flexible syntax.
 
+## version 1.5.1.20120830
+1. Enhance the page switch, more stable now. (thanks Gabrièl for this)
+2. A littie bug fixed.
+
 ## version 1.5.1 bug fixed: 
 1. Fixed android performance issue(only occur when use multiple languages)
 

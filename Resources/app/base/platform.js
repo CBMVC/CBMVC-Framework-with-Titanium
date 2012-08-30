@@ -146,7 +146,8 @@ CB.Platform = {
 				win.actIndContainer.actIndBg.loading = Ti.UI.createLabel({
 					text : CB.Util.L('loading'),
 					color : '#fff',
-					left : '30%',
+					textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER,
+					//left : '30%',
 					bottom : '25%'
 				});
 				win.actIndContainer.actIndBg.add(win.actIndContainer.actIndBg.loading);

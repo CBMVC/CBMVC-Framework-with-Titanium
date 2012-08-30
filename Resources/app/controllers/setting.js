@@ -83,7 +83,7 @@ __exports.viewLoaded = function(e) {
 	});
 	
 	this.view.contentView.pushToHomeBtn.addEventListener('click', function() {
-		CB.pushController(CB.controllers.home,'right');
+		CB.pushController(CB.controllers.home,'down');
 	});
 
 	/*

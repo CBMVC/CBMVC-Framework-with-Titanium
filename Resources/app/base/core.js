@@ -1,6 +1,6 @@
 /**
  * @file overview This file contains the core framework class CBMVC.
- * @version: 1.5.1
+ * @version: 1.5.1.20120830
  * @author Winson  winsonet@gmail.com
  * @copyright Winson http://www.coderblog.in
  * @license MIT License http://www.opensource.org/licenses/mit-license.php
@@ -84,7 +84,7 @@ var CB = {
 
 			CB.controllers = [];
 			CB.includeControllers(CB.LoadControllers);
-			CB.pushController(CB.controllers[controller], animate, true);
+			CB.pushController(CB.controllers[controller], 'none');
 
 		}
 
@@ -290,7 +290,7 @@ Ti.include('/app/base/lib.js');
 	 * 	up: for move to up animation, default move to left
 	 * 	down: for move to down animation, default move to left
 	 */
-	CB.pushController = function(/*Controller*/controller, animate, isLaunch) {
+	CB.pushController = function(/*Controller*/controller, animate, isLaunch,callback) {
 		//CB.Platform.actInd.show();
 		var previous = (CB.stackOfControllers.length == 0) ? null : CB.stackOfControllers[CB.stackOfControllers.length - 1];
 
@@ -300,15 +300,32 @@ Ti.include('/app/base/lib.js');
 		 CB.mainView.add(controller.view);
 		 return;
 		 }*/
-
+		if(!CB.mainView.targetView){
+		    CB.mainView.targetView = Ti.UI.createView({
+                width:CB.screenWidth,
+                height:CB.screenHeight
+            });
+            CB.mainView.sourceView = Ti.UI.createView({
+                width:CB.screenWidth,
+                height:CB.screenHeight
+            });
+            CB.mainView.add(CB.mainView.targetView);
+            CB.mainView.add(CB.mainView.sourceView);
+		}
+		
+        var target = CB.mainView.targetView;
+        var source = CB.mainView.sourceView;
+        target.show();
+        source.show();
+        
 		var animationTop = 0;
-		var animationLeft = CB.mainView.left - CB.screenWidth;
+		var animationLeft = -CB.screenWidth;
 
 		//reset the mainView at first
-		CB.mainView.left = 0;
-		CB.mainView.top = 0;
-		CB.mainView.width = CB.screenWidth;
-		CB.mainView.height = CB.screenHeight;
+		// CB.mainView.left = 0;
+		// CB.mainView.top = 0;
+		// CB.mainView.width = CB.screenWidth;
+		// CB.mainView.height = CB.screenHeight;
 
 		//load the controller runtime
 		if (!controller.view) {
@@ -323,130 +340,158 @@ Ti.include('/app/base/lib.js');
 		}
 
 		CB.stackOfControllers.push(controller);
-
+		controller.animate = animate;
 		if (animate === 'none') {
-			CB.mainView.layouting(function() {
-
-				controller.base.viewWillAppear(controller);
-				//controller.view.left = 0;
-				//CB.mainView.left = 100;
-				//CB.mainView.backgroundColor = 'blue';
-				CB.mainView.add(controller.view);
-
-				if (previous !== null) {
-					previous.base.viewWillDisappear(previous);
-					CB.mainView.remove(previous.view);
-				}
-				controller.base.viewDidAppear(controller);
-			});
-			CB.Debug.echo('CB.mainView left:'+CB.mainView.left  + '  CB.mainView.width:'+CB.mainView.width, 399, 'core');
-			CB.Debug.echo('controller left:'+controller.view.left  + '  controller .width:'+controller.view.width, 400, 'core');
+			
 			//CB.Platform.actInd.hide();
 			//alert('after non :' + CB.mainView.children.length);
-			return;
 		} else if (animate === 'right') {
 			CB.mainView.layouting(function() {
 				CB.mainView.width = CB.screenWidth * 2;
+                CB.mainView.height = CB.screenHeight;
 				CB.mainView.left = -CB.screenWidth;
-
-				//controller.view.left = 0;
-				//controller.view.top = 0;
-
-				/*if (duplicateView) {
-				 CB.mainView.remove(duplicateView);
-				 }*/
-				CB.mainView.add(controller.view);
+				CB.mainView.top = 0;
+				target.left = 0;
+				target.top = 0;
+				target.add(controller.view);
 
 				if (previous !== null) {
-					previous.view.left = CB.screenWidth;
-					previous.base.viewWillDisappear(previous);
-				}
-				controller.base.viewWillAppear(controller);
-			});
-			animationLeft = CB.mainView.left + CB.screenWidth;
-		} else if (animate === 'up') {
-			CB.mainView.layouting(function() {
-				CB.mainView.height = CB.screenHeight * 2;
-				CB.mainView.top = -CB.screenHeight;
-
-				//controller.view.left = 0;
-
-				/*if (duplicateView) {
-				 CB.mainView.remove(duplicateView);
-				 }*/
-				CB.mainView.add(controller.view);
-
-				if (previous !== null) {
-					previous.view.top = CB.screenHeight;
+                    source.left = CB.screenWidth;
+				    source.top = 0;
 					previous.base.viewWillDisappear(previous);
 				}
 				controller.base.viewWillAppear(controller);
 			});
 			animationLeft = 0;
-			animationTop = CB.mainView.top + CB.screenHeight;
 		} else if (animate === 'down') {
 			CB.mainView.layouting(function() {
+                CB.mainView.width = CB.screenWidth;
 				CB.mainView.height = CB.screenHeight * 2;
-				controller.view.top = CB.screenHeight;
-
-				//controller.view.left = 0;
-
-				/*if (duplicateView) {
-				 CB.mainView.remove(duplicateView);
-				 }*/
-				CB.mainView.add(controller.view);
+                CB.mainView.left = 0;
+				CB.mainView.top = -CB.screenHeight;
+				target.left = 0;
+                target.top = 0;
+                target.add(controller.view);
 
 				if (previous !== null) {
+					source.top = CB.screenHeight;
+					source.left = 0;
 					previous.base.viewWillDisappear(previous);
 				}
 				controller.base.viewWillAppear(controller);
 			});
 			animationLeft = 0;
-			animationTop = CB.mainView.top - CB.screenHeight;
+		} else if (animate === 'up') {
+			CB.mainView.layouting(function() {
+                CB.mainView.width = CB.screenWidth;
+				CB.mainView.height = CB.screenHeight * 2;
+                CB.mainView.left = 0;
+                CB.mainView.top = 0;
+				target.left = 0;
+                target.top = CB.screenHeight;
+                target.add(controller.view);
+
+				if (previous !== null) {
+				    source.top = 0;
+				    source.left = 0;
+					previous.base.viewWillDisappear(previous);
+				}
+				controller.base.viewWillAppear(controller);
+			});
+			animationLeft = 0;
+			animationTop = -CB.screenHeight;
 		} else {
 			CB.mainView.layouting(function() {
 				CB.mainView.width = CB.screenWidth * 2;
-				controller.view.left = CB.screenWidth;
+                CB.mainView.height = CB.screenHeight;
+                CB.mainView.left = 0;
+                CB.mainView.top = 0;
+				target.left = CB.screenWidth;
+                target.top = 0;
+                target.add(controller.view);
 
-				CB.mainView.add(controller.view);
-
-				if (previous !== null) {
-					previous.base.viewWillDisappear(previous);
-				}
+                if (previous !== null) {
+                    source.left = 0;
+                    source.top = 0;
+                    previous.base.viewWillDisappear(previous);
+                }
 				controller.base.viewWillAppear(controller);
 			});
+            animationLeft = -CB.screenWidth;
+            animationTop = 0;
 		}
+		
+		if(animate == 'none'){
+		    CB.mainView.layouting(function() {
+                CB.mainView.left = 0;
+                CB.mainView.top = 0;
+                CB.mainView.width = CB.screenWidth;
+                CB.mainView.height = CB.screenHeight;
+                target.left = 0;
+                target.top = 0;
+                controller.base.viewWillAppear(controller);
+                target.add(controller.view);
 
-
-		CB.mainView.animate({
-			duration : CB.changeControllerDuration,
-			left : animationLeft,
-			top : animationTop,
-		}, function() {
-			CB.mainView.layouting(function() {
-				/*
-				CB.mainView.left = 0;
-				CB.mainView.top = 0;
-				CB.mainView.width = CB.screenWidth;
-				CB.mainView.height = CB.screenHeight;
-				*/
-
-				if (previous !== null) {
-					previous.base.viewWillDisappear(previous);
-					CB.mainView.remove(previous.view);
-				}
-				controller.base.viewDidAppear(controller);
-				//CB.Platform.actInd.hide();
-				//alert('push:' + CB.mainView.children.length);
-			});
-		});
-
+                if (previous !== null) {
+                    previous.base.viewWillDisappear(previous);
+                    source.remove(previous.view);
+                    previous.base.viewDidDisappear(previous);
+                }
+                source.hide();
+                CB.mainView.sourceView = target;
+                CB.mainView.targetView = source;
+                controller.base.viewDidAppear(controller);
+            });
+            if(callback){
+                callback();
+            }
+		}else{
+		    var animParam = {
+                duration : CB.changeControllerDuration,
+                left : animationLeft,
+                top : animationTop
+            };
+            if(!CB.Platform.isAndroid()){
+                animParam.curve = Ti.UI.ANIMATION_CURVE_EASE_IN_OUT;
+            }
+            CB.mainView.animate(animParam, function() {
+                CB.mainView.layouting(function() {
+                    
+                    // CB.mainView.left = 0;
+                    // CB.mainView.top = 0;
+                    // CB.mainView.width = CB.screenWidth;
+                    // CB.mainView.height = CB.screenHeight;
+                    // target.top = 0;
+                    // target.left = 0;
+    
+                    if (previous !== null) {
+                        previous.base.viewWillDisappear(previous);
+                        source.remove(previous.view);
+                        previous.base.viewDidDisappear(previous);
+                    }
+                    CB.mainView.sourceView = target;
+                    CB.mainView.targetView = source;
+                    controller.base.viewDidAppear(controller);
+                    //CB.Platform.actInd.hide();
+                    //alert('sourceView:' + CB.mainView.sourceView.children.length + '\n\rtargetView:' + CB.mainView.targetView.children.length);
+                    
+                    if(isLaunch){
+                        CB.stackOfControllers = [controller];
+                        CB.controllers = [controller.name];
+                        CB.includeControllers(CB.LoadControllers);
+                    }
+                });
+                if(callback){
+                    callback();
+                }
+            });
+		}
 	};
 
 	/**
 	 * Pop the controller and back to the previous view
 	 */
-	CB.popController = function(animate) {
+	CB.popController = function(animate,callback) {
 		if (CB.stackOfControllers.length <= 1)
 			return;
 
@@ -454,45 +499,154 @@ Ti.include('/app/base/lib.js');
 		var previous = CB.stackOfControllers[CB.stackOfControllers.length - 2];
 		CB.stackOfControllers.pop();
 		
+		var target = CB.mainView.targetView;
+        var source = CB.mainView.sourceView;
+        target.show();
+        source.show();
 
-		CB.mainView.layouting(function() {
-			CB.mainView.width = CB.screenWidth * 2;
-			CB.mainView.left = -CB.screenWidth;
-			top.view.left = CB.screenWidth;
-
-			if (previous !== null) {
-				previous.view.left = 0;
-				previous.view.top = 0;
-				CB.mainView.add(previous.view);
-				previous.base.viewWillAppear(previous);
-			}
-
-			top.base.viewWillDisappear(top);
-
-		});
-
-		CB.mainView.animate({
-			duration : CB.changeControllerDuration,
-			left : CB.mainView.left + CB.screenWidth,
-			top : 0
-		}, function() {
-			CB.mainView.layouting(function() {
-
-				if (previous !== null) {
-					//CB.mainView.add(previous.view);
-					previous.view.top = 0;
-					previous.base.viewDidAppear(previous);
-				}
-				
-				CB.mainView.left = 0;
-				CB.mainView.width = CB.screenWidth;
-
-				top.base.viewDidDisappear(top);
-				CB.mainView.remove(top.view);
-				//alert('pop:' + CB.mainView.children.length);
-			});
-		});
-
+        //reset the mainView at first
+        // CB.mainView.left = 0;
+        // CB.mainView.top = 0;
+        // CB.mainView.width = CB.screenWidth;
+        // CB.mainView.height = CB.screenHeight;
+		
+		var animationTop = 0;
+        var animationLeft = 0;
+        if(!animate && top.animate){
+            var animMap = {
+                none : 'none',
+                left : 'right',
+                right : 'left',
+                up : 'down',
+                down : 'up'
+            }
+            animate = animMap[top.animate];
+        }
+		if (animate && animate == 'none') {
+		    
+		} else if (animate === 'left') {
+            CB.mainView.layouting(function() {
+                CB.mainView.width = CB.screenWidth * 2;
+                CB.mainView.height = CB.screenHeight;
+                CB.mainView.left = 0;
+                CB.mainView.top = 0;
+                source.left = 0;
+                source.top = 0;
+                if (previous !== null) {
+                    target.left = CB.screenWidth;
+                    target.top = 0;
+                    target.add(previous.view);
+                    previous.base.viewWillAppear(previous);
+                }
+                top.base.viewWillDisappear(top);
+            });
+            animationLeft = -CB.screenWidth;
+        } else if (animate === 'up') {
+            CB.mainView.layouting(function() {
+                CB.mainView.width = CB.screenWidth;
+                CB.mainView.height = CB.screenHeight * 2;
+                CB.mainView.left = 0;
+                CB.mainView.top = 0;
+                source.left = 0;
+                source.top = 0;
+                if (previous !== null) {
+                    target.left = 0;
+                    target.top = CB.screenHeight;
+                    target.add(previous.view);
+                    previous.base.viewWillAppear(previous);
+                }
+                top.base.viewWillDisappear(top);
+            });
+            animationTop = -CB.screenHeight;
+        } else if (animate === 'down') {
+            CB.mainView.layouting(function() {
+                CB.mainView.width = CB.screenWidth;
+                CB.mainView.height = CB.screenHeight * 2;
+                CB.mainView.left = 0;
+                CB.mainView.top = -CB.screenHeight;
+                source.left = 0;
+                source.top = CB.screenHeight;
+                if (previous !== null) {
+                    target.left = 0;
+                    target.top = 0;
+                    target.add(previous.view);
+                    previous.base.viewWillAppear(previous);
+                }
+                top.base.viewWillDisappear(top);
+            });
+            animationTop = 0;
+        } else {
+            CB.mainView.layouting(function() {
+                CB.mainView.width = CB.screenWidth * 2;
+                CB.mainView.height = CB.screenHeight;
+                CB.mainView.left = -CB.screenWidth;
+                CB.mainView.top = 0;
+                source.left = CB.screenWidth;
+                source.top = 0;
+                if (previous !== null) {
+                    target.left = 0;
+                    target.top = 0;
+                    target.add(previous.view);
+                    previous.base.viewWillAppear(previous);
+                }
+                top.base.viewWillDisappear(top);
+            });
+        }
+        if(animate == 'none'){
+            CB.mainView.layouting(function() {
+                CB.mainView.left = 0;
+                CB.mainView.top = 0;
+                CB.mainView.width = CB.screenWidth;
+                CB.mainView.height = CB.screenHeight;
+                top.base.viewWillDisappear(top);
+                if (previous !== null) {
+                    target.top = 0;
+                    target.left = 0;
+                    previous.base.viewWillAppear(previous);
+                    target.add(previous.view);
+                    previous.base.viewDidAppear(previous);
+                }
+                source.remove(top.view);
+                source.hide();
+                CB.mainView.sourceView = target;
+                CB.mainView.targetView = source;
+                top.base.viewDidDisappear(top);
+            });
+            if(callback){
+                callback();
+            }
+        }else{
+            var animParam = {
+                duration : CB.changeControllerDuration,
+                left : animationLeft,
+                top : animationTop
+            };
+            if(!CB.Platform.isAndroid())
+                animParam.curve = Ti.UI.ANIMATION_CURVE_EASE_IN_OUT;
+            CB.mainView.animate(animParam, function() {
+                CB.mainView.layouting(function() {
+                    // CB.mainView.left = 0;
+                    // CB.mainView.top = 0;
+                    // CB.mainView.width = CB.screenWidth;
+                    // CB.mainView.height = CB.screenHeight;
+                    
+                    if (previous !== null) {
+                        // target.top = 0;
+                        // target.left = 0;
+                        previous.base.viewDidAppear(previous);
+                    }
+                    source.remove(top.view);
+                    CB.mainView.sourceView = target;
+                    CB.mainView.targetView = source;
+                    top.base.viewDidDisappear(top);
+                    //CB.controllers[top.name] = {name: top.name};
+                    //alert('pop:' + CB.mainView.children.length);
+                });
+                if(callback){
+                    callback();
+                }
+            });
+        }
 	}
 	/**
 	 * Set the root controller to start the app
