@@ -67,7 +67,7 @@ CB.LoadControllers= ['simpleView','home','setting'];
 //launch the app
 CB.Launch('home',false,'none');
 
-//set default orientation modes
+//set default orientation modes, is don't set it, will support all orientation modes
 CB.OrientationModes = [Ti.UI.PORTRAIT];
 
 CB.openWindow();
