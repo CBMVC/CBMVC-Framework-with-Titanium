@@ -74,9 +74,11 @@ __exports.viewLoaded = function(e) {
 		});
 	});
 
+	CB.Debug.dump('====home viewloaded====');
 };
 
 __exports.viewWillAppear = function(e) {
+	CB.Debug.dump('====home viewWillAppear====');
 	if (e != undefined) {
 		//CB.Common.setCurrMenu(e.view.mainFrame, CB.Styles.menuSelectedTop.home);
 		//CB.Common.closeMenu(e.view.mainFrame);

@@ -36,8 +36,7 @@ CB.Platform = {
 		for (var i = 0, l = args.length; i < l; i++) {
 			var source = args[i];
 			for (var prop in source) {
-				if (source[prop] !==
-					void 0)
+				if (source[prop] !== void 0)
 					obj[prop] = source[prop];
 			}
 		}

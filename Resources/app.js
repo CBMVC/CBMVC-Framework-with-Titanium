@@ -64,7 +64,10 @@ CB.DebugMode = {
 //load the controllers, the main controller must be the last one
 CB.LoadControllers= ['simpleView','home','setting'];
 
-
 //launch the app
 CB.Launch('home',false,'none');
+
+//set default orientation modes
+CB.OrientationModes = [Ti.UI.PORTRAIT];
+
 CB.openWindow();

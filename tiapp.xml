@@ -6,6 +6,7 @@
     <property name="acs-oauth-secret-development" type="string">jhYINi5MiXZ5NYA6jUzteNRTJW0Nj18s</property>
     <property name="acs-oauth-key-development" type="string">Uyzwu100hL4fy1STNZNEILS03aVUAKZP</property>
     <property name="acs-api-key-development" type="string">mBCO5rYNZexZzqTAlbiSrrbdqYALiTzh</property>
+    <property name="ti.android.bug2373.finishfalseroot" type="bool">true</property>
     <deployment-targets>
         <target device="mobileweb">false</target>
         <target device="iphone">true</target>
@@ -35,6 +36,9 @@
     <iphone>
         <orientations device="iphone">
             <orientation>Ti.UI.PORTRAIT</orientation>
+            <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
         </orientations>
         <orientations device="ipad">
             <orientation>Ti.UI.PORTRAIT</orientation>

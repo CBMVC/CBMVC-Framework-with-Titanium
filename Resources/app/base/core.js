@@ -110,6 +110,11 @@ var CB = {
 		en :{}
 	},
 	/**
+	 * Orientation Modes
+	 * Ti.UI.LANDSCAPE_LEFT, Ti.UI.LANDSCAPE_RIGHT,Ti.UI.PORTRAIT, Ti.UI.UPSIDE_PORTRAIT
+	 */
+	OrientationModes : [Ti.UI.PORTRAIT, Ti.UI.UPSIDE_PORTRAIT, Ti.UI.LANDSCAPE_LEFT, Ti.UI.LANDSCAPE_RIGHT],
+	/**
 	 * Debug mode setting
 	 */
 	DebugMode : {
@@ -276,6 +281,8 @@ Ti.include('/app/base/lib.js');
 		//}
 
 		CB.Platform.actInd.init(CB.mainWindow);
+		
+		CB.mainWindow.orientationModes = CB.OrientationModes;
 		CB.mainWindow.open();
 	};
 
@@ -664,16 +671,16 @@ Ti.include('/app/base/lib.js');
 
 	CB.require = function(path, viewName) {
 		//for debug to test the run time
-		var startTime = 0;
-		var endTime = 0;
-		startTime = new Date().getTime();
+		var startTime = new Date().getTime();
+		startTime = new Date('2011-04-11 11:51:00');
 
 		__exports = {
 			viewName : viewName
 		};
 		Ti.include(path + '.js');
 		//for debug to test the run time
-		endTime = new Date().getTime();
+		var endTime = new Date().getTime();
+		endTime = new Date('2011-04-11 12:51:00');
 		CB.Debug.echo(viewName + ' run time:' + (endTime - startTime) / 1000 + 'sec');
 
 		return __exports;
