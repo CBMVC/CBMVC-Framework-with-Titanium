@@ -1,6 +1,6 @@
 /**
  * @file overview This file contains the core framework class CBMVC.
- * @version: 1.5.1.20120830
+ * @version: 1.5.1.20120919
  * @author Winson  winsonet@gmail.com
  * @copyright Winson http://www.coderblog.in
  * @license MIT License http://www.opensource.org/licenses/mit-license.php
@@ -319,7 +319,7 @@ Ti.include('/app/base/lib.js');
             CB.mainView.add(CB.mainView.targetView);
             CB.mainView.add(CB.mainView.sourceView);
 		}
-		
+
         var target = CB.mainView.targetView;
         var source = CB.mainView.sourceView;
         target.show();
@@ -348,11 +348,7 @@ Ti.include('/app/base/lib.js');
 
 		CB.stackOfControllers.push(controller);
 		controller.animate = animate;
-		if (animate === 'none') {
-			
-			//CB.Platform.actInd.hide();
-			//alert('after non :' + CB.mainView.children.length);
-		} else if (animate === 'right') {
+		 if (animate === 'right') {
 			CB.mainView.layouting(function() {
 				CB.mainView.width = CB.screenWidth * 2;
                 CB.mainView.height = CB.screenHeight;
@@ -407,7 +403,7 @@ Ti.include('/app/base/lib.js');
 			});
 			animationLeft = 0;
 			animationTop = -CB.screenHeight;
-		} else {
+		} else if(!animate || animate === 'left'){
 			CB.mainView.layouting(function() {
 				CB.mainView.width = CB.screenWidth * 2;
                 CB.mainView.height = CB.screenHeight;
@@ -427,23 +423,43 @@ Ti.include('/app/base/lib.js');
             animationLeft = -CB.screenWidth;
             animationTop = 0;
 		}
-		
+
 		if(animate == 'none'){
 		    CB.mainView.layouting(function() {
-                CB.mainView.left = 0;
-                CB.mainView.top = 0;
+                
+                if(isLaunch){
+                	 CB.mainView.width = CB.screenWidth;
+                	 target.left = 0;
+                }else{
+                	CB.mainView.left = 0;           
+                	CB.mainView.top = 0;
+	                CB.mainView.width = CB.screenWidth * 2;
+	                target.left = CB.screenWidth;
+                }
+                
+                /*
                 CB.mainView.width = CB.screenWidth;
                 CB.mainView.height = CB.screenHeight;
-                target.left = 0;
+                CB.mainView.left = 0;   
+                CB.mainView.top = 0;
+				
                 target.top = 0;
+                target.left = 0;
+                */
                 controller.base.viewWillAppear(controller);
                 target.add(controller.view);
 
                 if (previous !== null) {
-                    previous.base.viewWillDisappear(previous);
-                    source.remove(previous.view);
-                    previous.base.viewDidDisappear(previous);
+                   previous.base.viewWillDisappear(previous);
+                   source.remove(previous.view);
+                   previous.base.viewDidDisappear(previous);
                 }
+                
+                if(!isLaunch){
+	                CB.mainView.left = -CB.screenWidth;           
+	                CB.mainView.top = 0;
+                }
+                
                 source.hide();
                 CB.mainView.sourceView = target;
                 CB.mainView.targetView = source;
@@ -481,12 +497,12 @@ Ti.include('/app/base/lib.js');
                     controller.base.viewDidAppear(controller);
                     //CB.Platform.actInd.hide();
                     //alert('sourceView:' + CB.mainView.sourceView.children.length + '\n\rtargetView:' + CB.mainView.targetView.children.length);
-                    
+                    /*
                     if(isLaunch){
-                        CB.stackOfControllers = [controller];
-                        CB.controllers = [controller.name];
-                        CB.includeControllers(CB.LoadControllers);
-                    }
+                       // CB.stackOfControllers = [controller];
+                       // CB.controllers = [controller.name];
+                       // CB.includeControllers(CB.LoadControllers);
+                    }*/
                 });
                 if(callback){
                     callback();
@@ -505,7 +521,7 @@ Ti.include('/app/base/lib.js');
 		var top = CB.stackOfControllers[CB.stackOfControllers.length - 1];
 		var previous = CB.stackOfControllers[CB.stackOfControllers.length - 2];
 		CB.stackOfControllers.pop();
-		
+
 		var target = CB.mainView.targetView;
         var source = CB.mainView.sourceView;
         target.show();
@@ -516,9 +532,11 @@ Ti.include('/app/base/lib.js');
         // CB.mainView.top = 0;
         // CB.mainView.width = CB.screenWidth;
         // CB.mainView.height = CB.screenHeight;
-		
+
 		var animationTop = 0;
         var animationLeft = 0;
+        // use previous view's animate
+        
         if(!animate && top.animate){
             var animMap = {
                 none : 'none',
@@ -529,9 +547,7 @@ Ti.include('/app/base/lib.js');
             }
             animate = animMap[top.animate];
         }
-		if (animate && animate == 'none') {
-		    
-		} else if (animate === 'left') {
+		 if (animate === 'right') {
             CB.mainView.layouting(function() {
                 CB.mainView.width = CB.screenWidth * 2;
                 CB.mainView.height = CB.screenHeight;
@@ -582,7 +598,7 @@ Ti.include('/app/base/lib.js');
                 top.base.viewWillDisappear(top);
             });
             animationTop = 0;
-        } else {
+        } else if(!animate || animate === 'left'){
             CB.mainView.layouting(function() {
                 CB.mainView.width = CB.screenWidth * 2;
                 CB.mainView.height = CB.screenHeight;
@@ -609,6 +625,7 @@ Ti.include('/app/base/lib.js');
                 if (previous !== null) {
                     target.top = 0;
                     target.left = 0;
+                    previous.top = 0;
                     previous.base.viewWillAppear(previous);
                     target.add(previous.view);
                     previous.base.viewDidAppear(previous);
@@ -628,8 +645,8 @@ Ti.include('/app/base/lib.js');
                 left : animationLeft,
                 top : animationTop
             };
-            if(!CB.Platform.isAndroid())
-                animParam.curve = Ti.UI.ANIMATION_CURVE_EASE_IN_OUT;
+            //if(!CB.Platform.isAndroid())
+            //    animParam.curve = Ti.UI.ANIMATION_CURVE_EASE_IN_OUT;
             CB.mainView.animate(animParam, function() {
                 CB.mainView.layouting(function() {
                     // CB.mainView.left = 0;
@@ -638,8 +655,9 @@ Ti.include('/app/base/lib.js');
                     // CB.mainView.height = CB.screenHeight;
                     
                     if (previous !== null) {
-                        // target.top = 0;
-                        // target.left = 0;
+                         target.top = 0;
+                         target.left = 0;
+                         previous.top = 0;
                         previous.base.viewDidAppear(previous);
                     }
                     source.remove(top.view);

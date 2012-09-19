@@ -80,10 +80,13 @@ __exports.viewLoaded = function(e) {
 			var mp = CB.Models.human.getByFirstName(e.view.contentView.textFirstName.value);
 			CB.Debug.dump(mp, 80, 'setting.js');
 		}
+		
+		//CB.mainWindow.orientationModes = [Ti.UI.PORTRAIT, Ti.UI.UPSIDE_PORTRAIT];
 	});
 	
 	this.view.contentView.pushToHomeBtn.addEventListener('click', function() {
-		CB.pushController(CB.controllers.home,'down');
+		//CB.pushController(CB.controllers.home,'down');
+		CB.mainWindow.orientationModes = [Ti.UI.LANDSCAPE_LEFT, Ti.UI.LANDSCAPE_RIGHT];
 	});
 
 	/*
